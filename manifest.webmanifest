@@ -1,0 +1,23 @@
+{
+  "name": "Budapest 2026 · Álvaro & Juan",
+  "short_name": "Budapest 26",
+  "description": "El finde en Budapest: 31 de julio – 3 de agosto de 2026.",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0d1220",
+  "theme_color": "#0d1220",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ],
+  "shortcuts": [
+    { "name": "El finde", "url": "./#/agenda", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "La noche", "url": "./#/noche", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Mapa", "url": "./#/mapa", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Budapest 2026 · Álvaro & Juan</title>
+<meta name="description" content="El finde en Budapest: 31 de julio – 3 de agosto de 2026.">
+<meta name="theme-color" content="#0d1220">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+/* — ajustes hermanos de Budapest — */
+.sis-link{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--muted);font-family:var(--serif);font-weight:800;font-size:.72rem;text-decoration:none}
+.sis-link:hover{color:var(--accent);border-color:var(--accent);text-decoration:none}
+.bp-code{font-size:1.6rem}
+</style>
+</head>
+<body>
+
+<!-- ============ TOP BAR ============ -->
+<header class="topbar" id="topbar">
+  <a class="wordmark" href="#/" aria-label="Inicio">
+    <span class="wordmark-cyr">BUDAPEST</span><span class="wordmark-year">26</span>
+  </a>
+  <div class="topbar-actions">
+    <a class="sis-link" href="https://aronfenix.github.io/viaje-belgrado-2026/" title="La guía hermana: Belgrado" aria-label="Ir a la guía de Belgrado">БГ</a>
+    <button class="theme-toggle" id="searchBtn" aria-label="Buscar">
+      <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+    </button>
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4.6"/>
+        <g><line x1="12" y1="2" x2="12" y2="4.6"/><line x1="12" y1="19.4" x2="12" y2="22"/><line x1="2" y1="12" x2="4.6" y2="12"/><line x1="19.4" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.8" y2="6.8"/><line x1="17.2" y1="17.2" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.8" y2="17.2"/><line x1="17.2" y1="6.8" x2="19.1" y2="4.9"/></g>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ HOME ============ -->
+<section class="page page-home" data-page="home">
+
+  <div class="hero" id="hero">
+    <svg class="hero-svg" viewBox="0 0 800 520" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" id="skyTop" stop-color="#0b1026"/>
+          <stop offset="62%" id="skyMid" stop-color="#243b63"/>
+          <stop offset="100%" id="skyLow" stop-color="#c96f3a"/>
+        </linearGradient>
+        <linearGradient id="riverG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1d3a4a"/><stop offset="100%" stop-color="#0e1e2c"/>
+        </linearGradient>
+      </defs>
+
+      <rect width="800" height="520" fill="url(#sky)"/>
+
+      <g class="stars" id="stars">
+        <circle cx="80" cy="60" r="1.4"/><circle cx="190" cy="110" r="1"/><circle cx="300" cy="50" r="1.2"/>
+        <circle cx="420" cy="90" r="1"/><circle cx="530" cy="45" r="1.5"/><circle cx="640" cy="105" r="1"/>
+        <circle cx="720" cy="60" r="1.3"/><circle cx="140" cy="160" r="1"/><circle cx="480" cy="150" r="1.1"/>
+        <circle cx="600" cy="170" r="0.9"/><circle cx="250" cy="190" r="1"/><circle cx="760" cy="150" r="1"/>
+      </g>
+      <line id="shootStar" x1="0" y1="0" x2="34" y2="12" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+
+      <circle id="heroSun" cx="580" cy="180" r="34" fill="#ffd9a0"/>
+
+      <g class="cloud cloud1" fill="#ffffff"><ellipse cx="0" cy="96" rx="46" ry="13"/><ellipse cx="32" cy="88" rx="30" ry="11"/></g>
+      <g class="cloud cloud2" fill="#ffffff"><ellipse cx="0" cy="150" rx="34" ry="10"/><ellipse cx="26" cy="144" rx="22" ry="8"/></g>
+
+      <g id="heroPlane">
+        <line x1="-70" y1="6" x2="-12" y2="6" stroke="#ffffff" stroke-width="2" opacity=".35" stroke-linecap="round"/>
+        <path d="M0 0 L26 6 L0 12 L6 6 Z" fill="#f4efe6"/>
+        <path d="M8 5 L2 -4 L6 -4 L14 5 Z M8 7 L2 16 L6 16 L14 7 Z" fill="#c9a227"/>
+      </g>
+
+      <!-- BUDA lejano: colina Gellért + estatua de la Libertad -->
+      <g class="layer" data-speed="0.12" data-mx="4" fill="#2a3350">
+        <path d="M0 330 Q 60 262 130 258 Q 200 256 250 300 L250 330 Z"/>
+        <rect x="118" y="234" width="10" height="26"/>
+        <path d="M123 234 L123 212 M123 216 Q 133 208 137 216 M123 220 Q 113 212 109 220" stroke="#2a3350" stroke-width="5" fill="none"/>
+      </g>
+
+      <!-- BUDA medio: castillo + Matthias + Bastión -->
+      <g class="layer" data-speed="0.22" data-mx="9" fill="#1f2740">
+        <path d="M40 330 L40 300 L200 300 L200 330 Z"/>
+        <path d="M96 300 a22 18 0 0 1 44 0 Z"/>
+        <rect x="112" y="266" width="12" height="20"/><circle cx="118" cy="262" r="4"/>
+        <rect x="60" y="284" width="12" height="18"/><polygon points="58,284 74,284 66,268"/>
+        <rect x="170" y="284" width="12" height="18"/><polygon points="168,284 184,284 176,268"/>
+        <rect x="210" y="288" width="9" height="14"/><polygon points="208,288 221,288 214.5,274"/>
+        <g class="windows" fill="#ffd27d">
+          <rect x="70" y="304" width="5" height="6"/><rect x="105" y="306" width="5" height="6"/>
+          <rect x="150" y="304" width="5" height="6"/><rect x="185" y="306" width="5" height="6"/>
+        </g>
+      </g>
+
+      <!-- PEST: PARLAMENTO protagonista -->
+      <g class="layer" data-speed="0.34" data-mx="16">
+        <path fill="#131a30" d="M420 330 L420 296 L780 296 L780 330 Z"/>
+        <!-- cúpula central -->
+        <path fill="#131a30" d="M560 296 L560 268 Q 560 244 584 238 Q 608 244 608 268 L608 296 Z"/>
+        <rect x="581" y="212" width="6" height="28" fill="#131a30"/>
+        <circle cx="584" cy="208" r="3" fill="#131a30"/>
+        <!-- torres flanco -->
+        <rect x="480" y="264" width="14" height="34" fill="#131a30"/><polygon points="477,264 497,264 487,242" fill="#131a30"/>
+        <rect x="674" y="264" width="14" height="34" fill="#131a30"/><polygon points="671,264 691,264 681,242" fill="#131a30"/>
+        <!-- torretas rítmicas -->
+        <path fill="#131a30" d="M430 296 l0 -16 6 -8 6 8 0 16 Z M454 296 l0 -14 5 -7 5 7 0 14 Z M508 296 l0 -14 5 -7 5 7 0 14 Z M532 296 l0 -16 6 -8 6 8 0 16 Z M620 296 l0 -16 6 -8 6 8 0 16 Z M646 296 l0 -14 5 -7 5 7 0 14 Z M700 296 l0 -14 5 -7 5 7 0 14 Z M724 296 l0 -16 6 -8 6 8 0 16 Z M752 296 l0 -12 5 -6 5 6 0 12 Z"/>
+        <!-- arcos fachada -->
+        <g class="windows" fill="#ffd27d">
+          <rect x="440" y="306" width="5" height="9"/><rect x="466" y="306" width="5" height="9"/>
+          <rect x="492" y="306" width="5" height="9"/><rect x="518" y="306" width="5" height="9"/>
+          <rect x="545" y="306" width="5" height="9"/><rect x="576" y="306" width="5" height="9"/>
+          <rect x="606" y="306" width="5" height="9"/><rect x="634" y="306" width="5" height="9"/>
+          <rect x="660" y="306" width="5" height="9"/><rect x="688" y="306" width="5" height="9"/>
+          <rect x="714" y="306" width="5" height="9"/><rect x="742" y="306" width="5" height="9"/>
+          <rect x="581" y="252" width="6" height="8"/>
+        </g>
+      </g>
+
+      <!-- DANUBIO -->
+      <g class="layer" data-speed="0.05" data-mx="2">
+        <rect x="0" y="330" width="800" height="190" fill="url(#riverG)"/>
+        <g class="river-glints" stroke="#7fb6c9" stroke-width="2" opacity=".35">
+          <line x1="90" y1="360" x2="150" y2="360"/><line x1="300" y1="384" x2="380" y2="384"/>
+          <line x1="520" y1="356" x2="586" y2="356"/><line x1="640" y1="400" x2="700" y2="400"/>
+          <line x1="180" y1="420" x2="260" y2="420"/><line x1="420" y1="440" x2="470" y2="440"/>
+        </g>
+        <!-- barco por el Danubio -->
+        <g id="heroBoat">
+          <path d="M0 8 L64 8 L56 18 L8 18 Z" fill="#0a0f1e"/>
+          <rect x="16" y="0" width="26" height="9" rx="2" fill="#131a30"/>
+          <rect x="20" y="3" width="4" height="4" fill="#ffd27d" class="boat-light"/>
+          <rect x="30" y="3" width="4" height="4" fill="#ffd27d" class="boat-light"/>
+        </g>
+        <!-- Puente de las Cadenas -->
+        <g stroke="#0a0f1e" fill="none">
+          <path d="M0 352 L800 344" stroke-width="6"/>
+          <path d="M190 350 L190 306 M560 346 L560 302" stroke-width="9"/>
+          <path d="M190 310 L560 306" stroke-width="3" opacity=".9"/>
+          <path d="M40 350 Q 115 322 190 314 M190 314 Q 375 296 560 310 M560 310 Q 660 316 760 344" stroke-width="2.5"/>
+          <path d="M120 348 120 332 M260 346 260 318 M330 345 330 312 M450 344 450 310 M630 344 630 322 M700 344 700 334" stroke-width="2"/>
+        </g>
+        <!-- tranvía 2 por la orilla de Pest -->
+        <g id="heroTram">
+          <rect x="0" y="0" width="56" height="13" rx="3" fill="#0a0f1e"/>
+          <rect x="4" y="3" width="9" height="6" fill="#ffd27d" opacity=".9"/>
+          <rect x="16" y="3" width="9" height="6" fill="#ffd27d" opacity=".9"/>
+          <rect x="28" y="3" width="9" height="6" fill="#ffd27d" opacity=".9"/>
+          <rect x="40" y="3" width="9" height="6" fill="#ffd27d" opacity=".9"/>
+        </g>
+      </g>
+
+      <g class="birds" stroke="#131a30" stroke-width="2" fill="none" stroke-linecap="round">
+        <g class="bird bird1"><path d="M0 0 Q4 -5 8 0 Q12 -5 16 0"/></g>
+        <g class="bird bird2"><path d="M0 0 Q3 -4 6 0 Q9 -4 12 0"/></g>
+      </g>
+    </svg>
+
+    <div class="hero-copy">
+      <p class="hero-kicker">El finde de colegas · 31 jul → 3 ago 2026</p>
+      <h1 class="hero-title"><span class="hero-cyr">BUDAPEST</span><span class="hero-lat">Magyarország</span></h1>
+      <p class="hero-sub">Álvaro <span class="amp">&</span> Juan</p>
+      <div class="countdown" id="countdown" aria-live="polite"></div>
+    </div>
+    <div class="hero-fade"></div>
+  </div>
+
+  <div class="wrap">
+    <div id="calleBar"></div>
+    <div id="liveDash"></div>
+    <div id="installBox"></div>
+    <div id="boardingBox"></div>
+    <div id="prologo"></div>
+    <div id="todayCard"></div>
+    <div class="cambio-card reveal" id="cambioBox">
+      <span class="cx-head">PÉNZVÁLTÓ · CASA DE CAMBIO</span>
+      <div class="fx-row">
+        <div class="fx-col"><label>EUR €</label><input id="fxEurH" type="number" inputmode="decimal" value="10"></div>
+        <span class="fx-eq">⇄</span>
+        <div class="fx-col"><label>HUF Ft</label><input id="fxRsdH" type="number" inputmode="decimal"></div>
+      </div>
+      <p class="muted small" id="fxNotaH">Cargando tipo de cambio…</p>
+      <div class="fx-refs" id="fxRefsH"></div>
+      <span class="cx-foot">* * * KÖSZÖNJÜK · GRACIAS * * *</span>
+    </div>
+    <div class="rio-head">
+      <span class="rio-cyr">INDEX</span>
+      <h2>El índice del Danubio</h2>
+      <p>Ocho amarres para tres días y medio. Seguid la corriente.</p>
+    </div>
+    <nav class="rio" id="rioIndex" aria-label="Secciones">
+      <svg class="rio-line" viewBox="0 0 24 100" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M12 0 C 20 6, 4 12, 12 18 C 20 24, 4 30, 12 36 C 20 42, 4 48, 12 54 C 20 60, 4 66, 12 72 C 20 78, 4 84, 12 90 C 18 95, 8 98, 12 100" fill="none" stroke="currentColor" stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linecap="round"/>
+      </svg>
+      <div id="rioItems"></div>
+    </nav>
+    <p class="legend-note">
+      <span class="fiab fiab-ok">✓ confirmado</span>
+      <span class="fiab fiab-ver">⚠ verificar</span>
+      <span class="fiab fiab-sug">💡 sugerencia</span>
+      <span class="legend-txt">— verificado online el 8 de julio de 2026. La guía hermana de Belgrado vive <a href="https://aronfenix.github.io/viaje-belgrado-2026/">aquí</a>.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============ PAGES ============ -->
+<section class="page" data-page="agenda"   data-num="01" data-title="El finde"      data-cyr="HÉTVÉGE"></section>
+<section class="page" data-page="ver"      data-num="02" data-title="Musts"         data-cyr="LÁTNIVALÓK"></section>
+<section class="page" data-page="mapa"     data-num="03" data-title="Mapa"          data-cyr="TÉRKÉP"></section>
+<section class="page" data-page="comer"    data-num="04" data-title="Comer"         data-cyr="ÉTEL"></section>
+<section class="page" data-page="noche"    data-num="05" data-title="La noche"      data-cyr="ÉJSZAKA"></section>
+<section class="page" data-page="cuaderno" data-num="06" data-title="Cuaderno"      data-cyr="NOTESZ"></section>
+<section class="page" data-page="gastos"   data-num="07" data-title="Gastos a medias" data-cyr="SZÁMLA"></section>
+<section class="page" data-page="practico" data-num="08" data-title="Práctico"      data-cyr="INFÓ"></section>
+
+</main>
+
+<!-- ============ SHEETS ============ -->
+<div class="sheet" id="guideSheet" hidden>
+  <div class="sheet-panel">
+    <div class="sheet-head"><h2>Guía</h2><button class="sheet-close" data-close="guideSheet" aria-label="Cerrar">✕</button></div>
+    <div class="sheet-grid" id="guideGrid"></div>
+  </div>
+</div>
+
+<div class="sheet" id="planSheet" hidden>
+  <div class="sheet-panel">
+    <div class="sheet-head"><h2 id="planSheetTitle">Añadir al plan</h2><button class="sheet-close" data-close="planSheet" aria-label="Cerrar">✕</button></div>
+    <div class="plan-days" id="planDays"></div>
+  </div>
+</div>
+
+<div class="sheet search-sheet" id="searchSheet" hidden>
+  <div class="sheet-panel">
+    <div class="sheet-head">
+      <input type="search" id="searchInput" placeholder="Buscar: Rudas, Vittula, lángos…" autocomplete="off">
+      <button class="sheet-close" data-close="searchSheet" aria-label="Cerrar">✕</button>
+    </div>
+    <div id="searchResults" class="search-results"></div>
+  </div>
+</div>
+
+<div class="sheet" id="ahoraSheet" hidden>
+  <div class="sheet-panel">
+    <div class="sheet-head"><h2>¿Y ahora qué?</h2><button class="sheet-close" data-close="ahoraSheet" aria-label="Cerrar">✕</button></div>
+    <div id="ahoraBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<!-- ============ SPLASH ============ -->
+<div id="splash" hidden>
+  <svg class="splash-plane" viewBox="0 0 40 24" aria-hidden="true">
+    <path d="M0 8 L30 12 L0 16 L8 12 Z" fill="currentColor"/>
+    <path d="M12 11 L4 0 L9 0 L19 11 Z M12 13 L4 24 L9 24 L19 13 Z" fill="currentColor" opacity=".7"/>
+  </svg>
+  <div class="splash-inner">
+    <span class="sp-kicker">31 JUL → 3 AGO · 2026</span>
+    <h1 class="sp-title">BUDAPEST</h1>
+    <p class="sp-names">Álvaro <span>&</span> Juan</p>
+    <p class="sp-sub">Tres noches, dos balnearios, un Parlamento<br>y todos los primos del Wurlitzer.</p>
+    <button id="splashGo" class="btn">Isten hozott — entrar</button>
+  </div>
+</div>
+
+<!-- ============ BOTTOM NAV ============ -->
+<nav class="bottomnav" aria-label="Navegación principal">
+  <a href="#/" data-nav="home"><span class="bn-ico">⌂</span><span>Inicio</span></a>
+  <a href="#/agenda" data-nav="agenda"><span class="bn-ico">▦</span><span>Finde</span></a>
+  <a href="#/mapa" data-nav="mapa"><span class="bn-ico">◎</span><span>Mapa</span></a>
+  <a href="#/noche" data-nav="noche"><span class="bn-ico">☾</span><span>Noche</span></a>
+  <button id="guideBtn" data-nav="guide"><span class="bn-ico">☰</span><span>Guía</span></button>
+</nav>
+
+<script src="data/budapest.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/map.js"></script>
+<script src="js/app.js"></script>
+<script src="js/fx.js"></script>
+<script src="js/live.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').then((reg) => {
+      reg.addEventListener('updatefound', () => {
+        const w = reg.installing;
+        if (!w) return;
+        w.addEventListener('statechange', () => {
+          if (w.state === 'activated' && navigator.serviceWorker.controller) {
+            const pill = document.createElement('button');
+            pill.className = 'update-pill';
+            pill.innerHTML = 'La guía se actualizó — <b>tocar para recargar</b>';
+            pill.addEventListener('click', () => location.reload());
+            document.body.appendChild(pill);
+          }
+        });
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>

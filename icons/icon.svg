@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#16213f"/>
+      <stop offset="70%" stop-color="#0d1220"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="110" fill="url(#bg)"/>
+  <circle cx="368" cy="140" r="42" fill="#c9a227"/>
+  <!-- parlamento -->
+  <g fill="#f4efe6">
+    <rect x="96" y="300" width="320" height="40"/>
+    <path d="M226 300 L226 268 Q 226 240 256 232 Q 286 240 286 268 L286 300 Z"/>
+    <rect x="252" y="204" width="8" height="32"/>
+    <circle cx="256" cy="199" r="5"/>
+    <rect x="140" y="272" width="16" height="30"/><polygon points="136,272 160,272 148,246"/>
+    <rect x="356" y="272" width="16" height="30"/><polygon points="352,272 376,272 364,246"/>
+    <path d="M180 300 l0 -16 7 -9 7 9 0 16 Z M310 300 l0 -16 7 -9 7 9 0 16 Z"/>
+  </g>
+  <!-- danubio -->
+  <path d="M64 372 Q 160 358 256 372 T 448 372 L448 400 Q 352 386 256 400 T 64 400 Z" fill="#2e7d76"/>
+  <path d="M64 414 Q 160 402 256 414 T 448 414 L448 434 Q 352 424 256 434 T 64 434 Z" fill="#2e7d76" opacity=".55"/>
+  <text x="96" y="184" font-family="Georgia, 'Playfair Display', serif" font-weight="800" font-size="104" fill="#f4efe6">BP</text>
+</svg>
