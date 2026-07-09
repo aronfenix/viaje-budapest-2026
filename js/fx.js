@@ -58,6 +58,9 @@
   const INDEX = [];
   const add = (t, s, h, x) => INDEX.push({ t, s, h, x: x || "" });
   D.sitios.forEach((s) => add(s.nombre, `Must · ${s.zona}`, "#/ver", s.desc));
+  D.quehacer.actos.forEach((a) => add(a.titulo, "Qué hacer", "#/agenda", a.texto));
+  D.barrios.zonas.forEach((z) => add(z.nombre, `La ciudad · ${z.tag}`, "#/barrios", z.desc));
+  D.comer.bloques.forEach((b) => (b.glosario || []).forEach((g) => add(g.t, "Diccionario del menú", "#/comer", g.d)));
   D.noche.bloques.forEach((b) => { add(b.titulo, "La noche", "#/noche", b.texto); b.sitios.forEach((s) => add(s.nombre, `La noche · ${s.zona}`, "#/noche", s.nota)); });
   D.comer.bloques.forEach((b) => { add(b.titulo, "Comer", "#/comer", b.texto); b.sitios.forEach((s) => add(s.nombre, `Comer · ${s.zona}`, "#/comer", s.nota)); });
   D.eventos.forEach((e) => add(e.nombre, `Cartel ${e.fecha.slice(8)} · ${e.lugar}`, "#/agenda", e.genero));
@@ -100,7 +103,7 @@
     const found = buscar(input.value);
     results.innerHTML = found.length
       ? found.map((e) => `<a class="search-hit" href="${e.h}"><b>${e.t}</b><span>${e.s}</span></a>`).join("")
-      : (input.value.trim().length >= 2 ? '<p class="vacio">Nada con ese nombre. ¿Seguro que no era en Belgrado?</p>' : "");
+      : (input.value.trim().length >= 2 ? '<p class="vacio">Nada con ese nombre por aquí.</p>' : "");
   });
   results.addEventListener("click", (e) => { if (e.target.closest("a")) sheet.hidden = true; });
 

@@ -176,8 +176,9 @@
 
   /* ---------- SECCIONES ---------- */
   const SECCIONES = [
-    { id: "agenda", sub: "Los cuatro días, con día y noche", ico: "▦" },
-    { id: "ver", sub: "Los musts, con horarios en vivo", ico: "◈" },
+    { id: "agenda", sub: "La ciudad en tres actos + ideas por día", ico: "▦" },
+    { id: "barrios", sub: "Buda, Pest y vuestro distrito VII", ico: "⌂" },
+    { id: "ver", sub: "Los musts, con fotos y horarios en vivo", ico: "◈" },
     { id: "mapa", sub: "Todo a tiros de piedra del hotel", ico: "◎" },
     { id: "comer", sub: "Gulyás, lángos y dónde caen", ico: "♨" },
     { id: "noche", sub: "Los primos del Wurlitzer", ico: "🎸" },
@@ -219,6 +220,7 @@
   const V = (inner) => `<svg class="ph-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${inner}</svg>`;
   const VINETAS = {
     agenda: V('<rect x="8" y="10" width="32" height="30" rx="3"/><line x1="8" y1="19" x2="40" y2="19"/><line x1="16" y1="6" x2="16" y2="13"/><line x1="32" y1="6" x2="32" y2="13"/><circle cx="24" cy="29" r="4"/>'),
+    barrios: V('<path d="M6 40 L6 26 L14 18 L22 26 L22 40"/><path d="M22 40 L22 22 L32 12 L42 22 L42 40"/><line x1="4" y1="40" x2="44" y2="40"/>'),
     ver: V('<path d="M8 40 L8 26 L14 26 L14 20 Q 14 12 24 10 Q 34 12 34 20 L34 26 L40 26 L40 40 Z"/><line x1="24" y1="10" x2="24" y2="4"/><circle cx="24" cy="30" r="3"/>'),
     mapa: V('<path d="M24 42 C 24 42, 38 28, 38 18 A 14 14 0 0 0 10 18 C 10 28, 24 42, 24 42 Z"/><circle cx="24" cy="18" r="5"/>'),
     comer: V('<circle cx="26" cy="26" r="14"/><circle cx="26" cy="26" r="7"/><path d="M8 8 L8 20 M5 8 L5 14 M11 8 L11 14 M8 20 L8 40"/>'),
@@ -317,7 +319,10 @@
     </div>`;
   }
 
-  /* ---------- AGENDA ---------- */
+  /* ---------- fotos (Wikimedia, con degradación silenciosa) ---------- */
+  const foto = (id, alt) => id ? `<figure class="card-foto"><img src="imgs/${id}.jpg" alt="${esc(alt || "")}" loading="lazy" onerror="this.parentElement.remove()"></figure>` : "";
+
+  /* ---------- QUÉ HACER + IDEAS POR DÍA ---------- */
   function metDia(iso) {
     try {
       const w = JSON.parse(localStorage.getItem("bud26_meteo"));
@@ -351,9 +356,30 @@
         ${evs.length ? `<h4>♪ Cartel del día</h4><ul class="day-list">${evs.map((e) => `<li class="dl-event">${esc(e.nombre)} · ${esc(e.lugar)} <span class="muted small">(${esc(e.genero)})</span> ${fiab(e.fiab)}</li>`).join("")}</ul>` : ""}
       </article>`;
     }).join("");
+    const actos = DATA.quehacer.actos.map((a) => `<article class="card reveal">
+      ${foto(a.img, a.titulo)}
+      <h3>${esc(a.titulo)}</h3>
+      <p>${esc(a.texto)}</p>
+    </article>`).join("");
     el.innerHTML = pageShell("agenda",
-      "Tres días y medio bien jugados. Lo escrito es propuesta, no contrato — con «＋ plan» en cualquier ficha lo hacéis vuestro.",
+      esc(DATA.quehacer.intro),
+      actos +
+      `<div class="rio-head" style="margin-top:34px"><h2>Ideas por día</h2><p>Propuesta, no contrato — con «＋ plan» en cualquier ficha lo hacéis vuestro.</p></div>` +
       cards + `<p class="muted small">${esc(DATA.eventosNota)}</p>`);
+  }
+
+  /* ---------- LA CIUDAD ---------- */
+  function renderBarrios(el) {
+    const zonas = DATA.barrios.zonas.map((z) => `<article class="card reveal">
+      ${foto(z.img, z.nombre)}
+      <span class="chip chip-sec">${esc(z.tag)}</span>
+      <h3>${esc(z.nombre)}</h3>
+      <p>${esc(z.desc)}</p>
+      ${z.hacer ? `<h4>Qué hacer</h4><p>${esc(z.hacer)}</p>` : ""}
+      ${z.dato ? `<p class="barrio-dato">✦ ${esc(z.dato)}</p>` : ""}
+      <p><a href="#/mapa" data-fly="${z.coords.join(",")}">Ver en el mapa →</a></p>
+    </article>`).join("");
+    el.innerHTML = pageShell("barrios", esc(DATA.barrios.intro), zonas);
   }
 
   /* ---------- MUSTS ---------- */
@@ -377,6 +403,7 @@
     const cards = DATA.sitios.map((s) => {
       const st = estadoSitio(s);
       return `<article class="card entrada reveal">
+        ${foto(s.id, s.nombre)}
         <h3>${esc(s.nombre)}</h3>
         <div class="sitio-meta">
           <span class="estado ${st.cls}">${st.txt}</span>
@@ -407,7 +434,9 @@
   const testimonioHtml = (t) => t ? `<blockquote class="testimonio">${esc(t.cita)}<span class="t-src">— ${esc(t.fuente)}</span></blockquote>` : "";
   function bloquesRender(bloques, pfx) {
     return bloques.map((b) => `<article class="card reveal">
-      <h3>${esc(b.titulo)}</h3><p>${esc(b.texto)}</p>
+      ${foto(b.img, b.titulo)}
+      <h3>${esc(b.titulo)}</h3>${b.texto.split("\n\n").map((t) => `<p>${esc(t)}</p>`).join("")}
+      ${b.glosario ? `<div class="glosario">${b.glosario.map((g) => `<div class="glo-item"><b>${esc(g.t)}</b><span>${esc(g.d)}</span></div>`).join("")}</div>` : ""}
       ${b.sitios.map((s) => `<h4>${esc(s.nombre)} ${fiab(s.fiab)} ${planBtn(pfx + slug(s.nombre))}</h4>
         <p class="muted small">📍 ${esc(s.zona)}</p>
         <div class="sitio-meta">${walkChip(s.coords)}</div>
@@ -585,7 +614,7 @@
   }
 
   /* ---------- ROUTER ---------- */
-  const RENDER = { agenda: renderAgenda, ver: renderVer, mapa: renderMapa, comer: renderComer, noche: renderNoche, cuaderno: renderCuaderno, gastos: renderGastos, practico: renderPractico };
+  const RENDER = { agenda: renderAgenda, barrios: renderBarrios, ver: renderVer, mapa: renderMapa, comer: renderComer, noche: renderNoche, cuaderno: renderCuaderno, gastos: renderGastos, practico: renderPractico };
   const rendered = new Set();
   const LIVE_PAGES = new Set(["agenda", "ver", "cuaderno", "gastos", "practico"]);
   function applyRoute() {
