@@ -79,6 +79,7 @@
   DATA.sitios.forEach((s) => reg(s.id, s.nombre, "◈", s.coords));
   DATA.noche.bloques.forEach((b) => b.sitios.forEach((s) => reg("n-" + slug(s.nombre), s.nombre, "☾", s.coords)));
   DATA.comer.bloques.forEach((b) => b.sitios.forEach((s) => reg("c-" + slug(s.nombre), s.nombre, "♨", s.coords)));
+  DATA.mapaZonas.zonas.forEach((z) => ["ver", "comer", "beber"].forEach((tipo) => (z.extras?.[tipo] || []).forEach((s) => reg(s.planId || s.id, s.nombre, tipo === "ver" ? "◈" : tipo === "comer" ? "♨" : "☾", s.coords))));
 
   const planBtn = (id) => `<button class="plan-btn" data-plan="${id}" title="Añadir a un día">＋ plan</button>`;
 
@@ -182,6 +183,7 @@
     { id: "mapa", sub: "Todo a tiros de piedra del hotel", ico: "◎" },
     { id: "comer", sub: "Gulyás, lángos y dónde caen", ico: "♨" },
     { id: "noche", sub: "Los primos del Wurlitzer", ico: "🎸" },
+    { id: "historia", sub: "Imperio, 1956 y socialismo de gulash", ico: "✦" },
     { id: "cuaderno", sub: "Notas del finde", ico: "✎" },
     { id: "gastos", sub: "Quién pagó qué — Álvaro/Juan", ico: "€" },
     { id: "practico", sub: "Forintos, BKK, termas, frases", ico: "✚" },
@@ -255,6 +257,51 @@
       ${p.texto.split("\n\n").map((t) => `<p>${esc(t)}</p>`).join("")}
       <span class="pr-firma">${esc(p.firma)}</span>
     </div>`;
+  }
+
+  /* ---------- MAPA INFOGRÁFICO DE ZONAS ---------- */
+  const ZONE_COLORS = ["#d16d4b", "#458e87", "#d2a43a", "#6f72b8", "#b4587a", "#4d88b8", "#758f45", "#9b6c43"];
+  let homeZoneMap = null;
+  function zoneHref(id) { return `#/zona?id=${encodeURIComponent(id)}`; }
+  function renderZoneMapHome() {
+    const root = $("#zoneMapHome"); if (!root || !DATA.mapaZonas) return;
+    if (homeZoneMap) { homeZoneMap.remove(); homeZoneMap = null; }
+    const m = DATA.mapaZonas;
+    const key = m.zonas.map((z, i) => `<a class="zone-key-link" href="${zoneHref(z.id)}" data-zone-id="${z.id}" style="--zone:${ZONE_COLORS[i % ZONE_COLORS.length]}"><span class="zone-dot"></span><span><b>${esc(z.nombre)}</b><br>${esc(z.sub)}</span></a>`).join("");
+    root.innerHTML = `<section class="zone-map-card"><div class="zone-map-head"><h2>${esc(m.titulo)}</h2><p>${esc(m.intro)}</p></div><div class="zone-map-wrap"><div class="home-zone-map" id="homeZoneMap" role="img" aria-label="Mapa real interactivo de las zonas de Budapest"></div><span class="zone-map-hint">Toca un contorno para abrir la zona</span></div><div class="zone-map-key">${key}</div></section>`;
+    requestAnimationFrame(() => {
+      if (!window.L || !$("#homeZoneMap")) return;
+      homeZoneMap = L.map("homeZoneMap", { scrollWheelZoom: false, zoomControl: true, attributionControl: true, zoomSnap: .5 }).setView(DATA.viaje.alojamiento.coords, 12);
+      L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>' }).addTo(homeZoneMap);
+      const bounds = L.latLngBounds([]);
+      m.zonas.forEach((z, i) => {
+        const color = ZONE_COLORS[i % ZONE_COLORS.length];
+        const circle = L.circle(z.centro, { radius: (z.mapRadio || z.radio * .68) * 1000, color, weight: 3, opacity: .95, fillColor: color, fillOpacity: .07, dashArray: "7 6" }).addTo(homeZoneMap);
+        circle.bindTooltip(z.corto, { permanent: true, direction: "center", className: "home-zone-label" });
+        circle.on("click", () => { location.hash = zoneHref(z.id); });
+        bounds.extend(circle.getBounds());
+      });
+      const homeIcon = L.divIcon({ className: "home-map-pin", html: "⌂", iconSize: [28, 28], iconAnchor: [14, 14] });
+      L.marker(DATA.viaje.alojamiento.coords, { icon: homeIcon }).addTo(homeZoneMap).bindTooltip("Vuestra base", { direction: "top" });
+      homeZoneMap.fitBounds(bounds, { padding: [24, 24] });
+    });
+  }
+
+  function zoneIdFromHash() { return new URLSearchParams(location.hash.split("?")[1] || "").get("id") || ""; }
+  function nearZone(coords, z) { return coords && distKm(z.centro, coords) <= z.radio; }
+  function renderZona(el) {
+    const z = DATA.mapaZonas.zonas.find((x) => x.id === zoneIdFromHash()) || DATA.mapaZonas.zonas[0];
+    const barrios = DATA.barrios.zonas.filter((b) => z.barrios.includes(b.id));
+    const sitios = [...DATA.sitios.filter((s) => nearZone(s.coords, z)), ...(z.extras?.ver || [])].sort((a, b) => distKm(z.centro, a.coords) - distKm(z.centro, b.coords));
+    const comidas = [...DATA.comer.bloques.flatMap((b) => b.sitios.map((s) => ({ ...s, bloque: b.titulo }))).filter((s) => nearZone(s.coords, z)), ...(z.extras?.comer || []).map((s) => ({ ...s, bloque: "Recomendación de la zona" }))].sort((a, b) => distKm(z.centro, a.coords) - distKm(z.centro, b.coords));
+    const noche = [...DATA.noche.bloques.flatMap((b) => b.sitios.map((s) => ({ ...s, bloque: b.titulo }))).filter((s) => nearZone(s.coords, z)), ...(z.extras?.beber || []).map((s) => ({ ...s, bloque: "Recomendación de la zona" }))].sort((a, b) => distKm(z.centro, a.coords) - distKm(z.centro, b.coords));
+    const contexto = barrios.length ? barrios.map((b) => `<article class="card zone-detail-lead reveal"><span class="chip chip-sec">${esc(b.tag)}</span><h3>${esc(b.nombre)}</h3><p>${esc(b.desc)}</p><div class="zone-facts"><div class="zone-fact"><b>Qué hacer</b>${esc(b.hacer)}</div><div class="zone-fact"><b>La capa histórica</b>${esc(b.dato)}</div></div></article>`).join("") : `<article class="card zone-detail-lead reveal"><h3>${esc(z.nombre)}</h3><p>${esc(z.sub)}</p><div class="zone-facts"><div class="zone-fact"><b>Cómo leerla</b>Esta pieza queda fuera del centro compacto: tratadla como una excursión con identidad propia.</div></div></article>`;
+    const group = (titulo, icono, items, render) => `<div class="zone-section-title"><h3>${icono} ${titulo}</h3><span>${items.length} cerca</span></div>${items.length ? items.map(render).join("") : '<p class="muted">No hay fichas cercanas todavía.</p>'}`;
+    const ver = group("Qué ver", "◈", sitios, (s) => `<article class="zone-place reveal"><h4>${esc(s.nombre)} ${fiab(s.fiab)} ${planBtn(s.planId || s.id)}</h4><p>${esc(s.desc)}</p><p class="muted small">📍 ${esc(s.zona)} · ${esc(s.dur)} · ${esc(s.precio)}</p><p class="small"><a href="https://www.google.com/maps/search/?api=1&query=${s.coords.join(",")}" target="_blank" rel="noopener">navegar</a></p></article>`);
+    const comer = group("Comer", "♨", comidas, (s) => `<article class="zone-place reveal"><h4>${esc(s.nombre)} ${fiab(s.fiab)} ${planBtn(s.planId || "c-" + slug(s.nombre))}</h4><p>${esc(s.nota)}</p><p class="muted small">${esc(s.bloque)} · 📍 ${esc(s.zona)}</p></article>`);
+    const salir = group("Beber y salir", "☾", noche, (s) => `<article class="zone-place reveal"><h4>${esc(s.nombre)} ${fiab(s.fiab)} ${planBtn(s.planId || "n-" + slug(s.nombre))}</h4><p>${esc(s.nota)}</p><p class="muted small">${esc(s.bloque)} · 📍 ${esc(s.zona)}</p></article>`);
+    el.innerHTML = pageShell("zona", `${esc(z.sub)} · selección automática en un radio aproximado de ${String(z.radio).replace(".", ",")} km.`, contexto + ver + comer + salir);
+    const h = el.querySelector(".page-head h2"); if (h) h.textContent = z.nombre;
   }
   function renderBoarding() {
     const box = $("#boardingBox");
@@ -417,7 +464,7 @@
       </article>`;
     }).join("");
     el.innerHTML = pageShell("ver",
-      "Diez musts para tres días y medio — con dos reservas urgentes marcadas ⚠. El estado abierto/cerrado usa la hora real del móvil.", cards);
+      `${DATA.sitios.length} lugares para tres días y medio — con las reservas urgentes marcadas ⚠ y una capa nueva de memoria socialista. El estado abierto/cerrado usa la hora real del móvil.`, cards);
   }
 
   /* ---------- MAPA ---------- */
@@ -447,6 +494,24 @@
   }
   function renderComer(el) { el.innerHTML = pageShell("comer", esc(DATA.comer.intro), bloquesRender(DATA.comer.bloques, "c-")); }
   function renderNoche(el) { el.innerHTML = pageShell("noche", esc(DATA.noche.intro), bloquesRender(DATA.noche.bloques, "n-")); }
+
+  /* ---------- HISTORIA ---------- */
+  function renderHistoria(el) {
+    const capas = DATA.historia.capas.map((c) => `<div class="tl-item reveal">
+      <span class="tl-years">${esc(c.años)}</span><h3>${esc(c.epoca)}</h3>
+      <p>${esc(c.texto)}</p><p class="tl-donde"><b>Se ve en:</b> ${esc(c.donde)}</p>
+    </div>`).join("");
+    const ensayo = `<article class="card historia-ensayo reveal">
+      <img src="imgs/socialismo-hungaro.webp" alt="Interpretación visual de la vida cotidiana en la Budapest socialista de los años setenta">
+      <span class="foto-nota">Imagen editorial generada · recreación histórica, no fotografía documental</span>
+      <h3>${esc(DATA.historia.ensayo.titulo)}</h3>
+      ${DATA.historia.ensayo.texto.split("\n\n").map((t) => `<p>${esc(t)}</p>`).join("")}
+      <div class="glosario">${DATA.historia.ensayo.claves.map((g) => `<div class="glo-item"><b>${esc(g.t)}</b><span>${esc(g.d)}</span></div>`).join("")}</div>
+      <h4>${esc(DATA.historia.ensayo.ruta.titulo)}</h4><p>${esc(DATA.historia.ensayo.ruta.texto)}</p>
+    </article>`;
+    const lecturas = `<article class="card reveal"><h3>Para seguir el hilo</h3>${DATA.historia.lecturas.map((l) => `<p><b>${esc(l.titulo)}</b> — ${esc(l.autor)}<br><span class="muted small">${esc(l.nota)}</span></p>`).join("")}</article>`;
+    el.innerHTML = pageShell("historia", esc(DATA.historia.intro), ensayo + `<div class="tl">${capas}</div>` + lecturas);
+  }
 
   /* ---------- CUADERNO ---------- */
   const CATS = ["Garito descubierto", "Comer/beber", "Idea", "Recuerdo"];
@@ -614,9 +679,9 @@
   }
 
   /* ---------- ROUTER ---------- */
-  const RENDER = { agenda: renderAgenda, barrios: renderBarrios, ver: renderVer, mapa: renderMapa, comer: renderComer, noche: renderNoche, cuaderno: renderCuaderno, gastos: renderGastos, practico: renderPractico };
+  const RENDER = { agenda: renderAgenda, barrios: renderBarrios, ver: renderVer, mapa: renderMapa, comer: renderComer, noche: renderNoche, historia: renderHistoria, cuaderno: renderCuaderno, gastos: renderGastos, practico: renderPractico, zona: renderZona };
   const rendered = new Set();
-  const LIVE_PAGES = new Set(["agenda", "ver", "cuaderno", "gastos", "practico"]);
+  const LIVE_PAGES = new Set(["agenda", "ver", "cuaderno", "gastos", "practico", "zona"]);
   function applyRoute() {
     const id = (location.hash.replace(/^#\//, "") || "home").split("?")[0] || "home";
     const target = $(`.page[data-page="${id}"]`) ? id : "home";
@@ -626,7 +691,7 @@
       rendered.add(target);
       observeReveals();
     }
-    if (target === "home") { renderBoarding(); todayCard(); renderPrologo(); renderCalle(); renderInstall(); observeReveals(); }
+    if (target === "home") { renderBoarding(); todayCard(); renderPrologo(); renderCalle(); renderInstall(); renderZoneMapHome(); observeReveals(); }
     if (target === "mapa") requestAnimationFrame(() => window.BGMap && BGMap.invalidate());
     if (target === "cuaderno" && window.__pendingCoords) {
       const c = window.__pendingCoords; window.__pendingCoords = null;

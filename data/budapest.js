@@ -1,7 +1,7 @@
 /* ============================================================
    BUDAPEST 26 · Álvaro & Juan — el finde
    Fiabilidad: 'ok' confirmado · 'ver' verificar · 'sug' sugerencia
-   Verificado online: 8 de julio de 2026.
+   Verificado y ampliado online: 10 de julio de 2026.
    ============================================================ */
 
 const DATA = {
@@ -93,6 +93,30 @@ const DATA = {
         dato: "Casi todo lo monumental de Budapest es de 1896: el milenio de la llegada magiar. La ciudad entera es la fiesta de cumpleaños número mil, congelada."
       },
     ],
+  },
+
+  /* ---------- MAPA INFOGRÁFICO DE ZONAS ---------- */
+  mapaZonas: {
+    titulo: "Budapest, por zonas",
+    intro: "El Danubio es la columna vertebral; los distritos, las habitaciones. Toca una zona para reunir su historia, visitas, sitios de comer y garitos cercanos.",
+    agua: ["M300 0 C280 90 315 145 295 220 C275 290 320 345 300 430 L375 430 C395 345 350 290 370 220 C390 145 355 85 375 0 Z"],
+    zonas: [
+      { id: "castillo", nombre: "Buda · Castillo", corto: "BUDA", sub: "Colina, murallas y termas", barrios: ["castillo"], centro: [47.4962, 19.0396], radio: 1.55, path: "M40 60 Q165 20 285 75 L285 235 Q160 265 45 205 Z", label: [165, 120], extras: {
+        beber: [{ planId: "zx-spiler-biergarten", nombre: "Spíler Biergarten", zona: "Dísz tér 8 · Castillo", coords: [47.4998, 19.0352], nota: "Jardín cervecero dentro del barrio del Castillo: craft, aguardientes y comida de beer garden. Más caro que Pest, pero evita bajar la colina solo para una ronda.", fiab: "ok", fuente: "Buda Castle, ver. 10-jul-2026" }]
+      } },
+      { id: "gellert", nombre: "Gellért · Buda sur", corto: "GELLÉRT", sub: "Rudas, cerveza y A38", barrios: ["xi"], centro: [47.4835, 19.0510], radio: 1.9, path: "M55 245 Q160 215 285 250 L285 395 Q150 425 40 370 Z", label: [160, 305] },
+      { id: "centro", nombre: "V · Belváros", corto: "BELVÁROS", sub: "Parlamento y Danubio", barrios: ["v"], centro: [47.5000, 19.0520], radio: 1.25, path: "M385 100 Q455 70 520 110 L515 250 Q450 275 385 235 Z", label: [450, 160] },
+      { id: "andrassy", nombre: "VI · Andrássy", corto: "ANDRÁSSY", sub: "Imperio y memoria", barrios: ["vi"], centro: [47.5065, 19.0650], radio: 1.25, path: "M455 20 Q525 5 585 45 L555 155 L500 155 Z", label: [525, 75] },
+      { id: "erzsebet", nombre: "VII · Erzsébetváros", corto: "DISTRITO VII", sub: "Vuestra base y la noche", barrios: ["vii"], centro: [47.4995, 19.0640], radio: 1.45, path: "M525 165 Q615 130 695 185 L675 300 Q595 325 520 270 Z", label: [610, 215] },
+      { id: "varosliget", nombre: "Városliget", corto: "VÁROSLIGET", sub: "Héroes y Széchenyi", barrios: ["varosliget"], centro: [47.5150, 19.0770], radio: 1.55, path: "M590 30 Q665 15 710 55 L700 150 Q640 165 570 135 Z", label: [645, 78], extras: {
+        beber: [{ planId: "zx-rundo", nombre: "Rundo", zona: "Mimóza-domb · Városliget", coords: [47.5147, 19.0820], nota: "Bar relajado entre los árboles con café, cócteles y música. Es la salida natural de Széchenyi cuando todavía no queréis volver al distrito VII.", fiab: "ok", fuente: "Web oficial Rundo, ver. 10-jul-2026" }]
+      } },
+      { id: "sur-pest", nombre: "Pest sur · VIII–IX", corto: "PEST SUR", sub: "1956, mercados y cerveza", barrios: ["xi"], centro: [47.4845, 19.0660], radio: 1.85, path: "M385 285 Q510 250 650 310 L630 415 L395 415 Z", label: [510, 340] },
+      { id: "memento", nombre: "Memento Park · Budafok", corto: "MEMENTO", sub: "Estatuas, bodegas y periferia", barrios: [], centro: [47.4269, 19.0002], radio: 1.2, path: "M8 335 Q60 310 115 335 L125 415 L10 415 Z", label: [65, 365], extras: {
+        comer: [{ planId: "zx-promontor", nombre: "Promontor Kertvendéglő", zona: "Kossuth Lajos u. 28 · Budafok", coords: [47.4267, 19.0363], nota: "Casa de comidas con jardín, platos húngaros y vinos de Etyek-Buda. Está a un bus corto del parque: mejor convertir Memento en media excursión por Budafok que comer cualquier cosa junto a la carretera.", fiab: "ok", fuente: "Web oficial Promontor, ver. 10-jul-2026" }],
+        beber: [{ planId: "zx-torley", nombre: "Törley Visitor Centre", zona: "Anna utca 7 · Budafok", coords: [47.4304, 19.0350], nota: "Bodegas de espumoso con 140 años. Solo con reserva; abre visitas el primer y segundo sábado del mes, y vuestro sábado 1 de agosto encaja. Es la copa con más contexto posible después de Memento Park.", fiab: "ver", fuente: "Törley oficial, ver. 10-jul-2026" }]
+      } }
+    ]
   },
 
   /* ---------- AGENDA: ideas por día ---------- */
@@ -227,6 +251,38 @@ const DATA = {
       consejo: "Desayuno del lunes, 8:00 en punto. Es caro para ser café y barato para ser palacio.",
       fiab: "ver"
     },
+    {
+      id: "memento", nombre: "Memento Park · las estatuas desplazadas", zona: "Budafok · periferia suroeste",
+      coords: [47.4269, 19.0002], dur: "1,5–2 h + trayecto", precio: "≈3.000 HUF",
+      horario: { 1: [10, 18], 2: [10, 18], 3: [10, 18], 4: [10, 18], 5: [10, 18], 6: [10, 18], 7: [10, 18] },
+      desc: "Tras 1989 Budapest no destruyó todas sus estatuas oficiales: reunió decenas en un parque diseñado por Ákos Eleőd para quitarles el poder sin borrar la historia. Lenin, Marx y Engels, soldados soviéticos y alegorías del movimiento obrero aparecen con contexto y a escala real. Es memoria pública sobre cómo mirar propaganda después de una ruptura política.",
+      consejo: "Es lejos para un finde corto: id solo si esta capa os interesa de verdad. Bus 150 desde Kelenföld; reservad unas 3,5 h puerta a puerta.",
+      fiab: "ok", fuente: "Memento Park + Budapestinfo · ver. 10-jul-2026"
+    },
+    {
+      id: "retro", nombre: "Budapest Retro Élményközpont", zona: "Szabadság tér · centro",
+      coords: [47.5044, 19.0507], dur: "1,5–2 h", precio: "≈7.500 HUF",
+      horario: { 1: [10, 20], 2: [10, 20], 3: [10, 20], 4: [10, 20], 5: [10, 20], 6: [10, 20], 7: [10, 20] },
+      desc: "Tres plantas de cultura material entre 1960 y 1990: un piso amueblado, televisión pública, juguetes, carteles, cabina de noticias y coche policial Lada. Es más experiencia interactiva que museo crítico, pero precisamente por eso enseña lo que las grandes narrativas olvidan: objetos, aspiraciones y normalidad cotidiana del socialismo de gulash.",
+      consejo: "Buen comodín de calor o tormenta. Comparad su nostalgia doméstica con el memorial soviético que aún permanece en Szabadság tér, a dos minutos.",
+      fiab: "ok", fuente: "Budapestinfo + web oficial · ver. 10-jul-2026"
+    },
+    {
+      id: "terror", nombre: "Casa del Terror · Andrássy 60", zona: "Terézváros",
+      coords: [47.5069, 19.0652], dur: "2 h", precio: "≈4.000 HUF",
+      horario: { 1: null, 2: [10, 18], 3: [10, 18], 4: [10, 18], 5: [10, 18], 6: [10, 18], 7: [10, 18] },
+      desc: "La misma casa fue sede de la Cruz Flechada fascista y después de la policía política ÁVH. La museografía es potentísima —tanques, música, celdas— y la visita importa, pero su interpretación equipara ambos regímenes de una forma muy ligada a la política memorial del gobierno húngaro actual. Conviene verla como documento histórico y como argumento contemporáneo.",
+      consejo: "No entréis buscando neutralidad: escuchad lo que cuenta y también cómo lo cuenta. Cerrada los lunes.",
+      fiab: "ok", fuente: "Budapestinfo + Terror Háza · ver. 10-jul-2026"
+    },
+    {
+      id: "corvin1956", nombre: "Corvin köz · la revolución de 1956", zona: "Distrito VIII",
+      coords: [47.4858, 19.0705], dur: "35–50 min", precio: "Gratis (exteriores)",
+      horario: null, siempre: "Pasaje y memoriales exteriores siempre accesibles.",
+      desc: "Este pasaje fue uno de los focos de resistencia armada contra la intervención soviética en octubre de 1956. Adolescentes y obreros atacaron carros desde un tejido urbano estrecho que aún permite leer la batalla. Las estatuas y placas posteriores cuentan además cómo cada Hungría —socialista, liberal y nacional-conservadora— ha reescrito a sus insurgentes.",
+      consejo: "Combinadlo con Élesztőház o con el Museo de Artes Aplicadas; es una parada de contexto, no una atracción convencional.",
+      fiab: "ok", fuente: "Budapest History Museum + patrimonio urbano · ver. 10-jul-2026"
+    },
   ],
 
   /* ---------- LA NOCHE (el corazón de esta guía) ---------- */
@@ -260,6 +316,8 @@ const DATA = {
         sitios: [
           { nombre: "Élesztőház", zona: "IX, Tűzoltó u. (M3 Corvin, ~12 min)", coords: [47.483, 19.068], nota: "«La casa de la levadura»: ruin pub cervecero en una cristalería vieja, ~20 grifos de craft húngara. El Samo Pivo de Budapest.", fiab: "ver" },
           { nombre: "Csak a jó sör", zona: "Kertész u. 42 · 9 min", coords: [47.501, 19.067], nota: "«Solo cerveza buena», y el nombre es un contrato: tienda-bar con cientos de botellas y grifos rotando. Para la última tranquila del domingo.", fiab: "ver" },
+          { nombre: "KEG Sörművház", zona: "Buda · Orlay u. 1", coords: [47.4807, 19.0519], nota: "Treinta y tantos grifos en un sótano abovedado, con foco en microcervecerías húngaras y una pizarra que permite comparar estilos sin acabar en una excursión industrial. Encaja después de Gellért o antes de A38.", fiab: "sug" },
+          { nombre: "MONYO Tap House", zona: "Kálvin tér · 15 min", coords: [47.4892, 19.0617], nota: "La barra céntrica de una de las cerveceras craft que cambió la escena local. Buena parada para entender qué hace Hungría hoy más allá de Dreher: IPA, sour y ediciones de temporada, con vuelos de cata si queréis probar sin pedir pintas enteras.", fiab: "sug" },
         ]
       },
     ]
@@ -300,7 +358,9 @@ const DATA = {
         texto: "La comida de diario húngara vive en cantinas, mercados y mostradores. Es la mitad barata y la mitad más auténtica de la experiencia:",
         sitios: [
           { nombre: "Frici Papa", zona: "Király u. · 7 min", coords: [47.5005, 19.063], nota: "Kifőzde (casa de comidas) de manual: manteles sencillos, carta larga de guisos del día y cuentas de 2.500-3.500 HUF por persona. Aquí se come lo que comen los del barrio, al precio que pagan los del barrio.", fiab: "sug" },
-          { nombre: "Kádár Étkezde", zona: "Klauzál tér · 8 min", coords: [47.4998, 19.0618], nota: "Leyenda absoluta del almuerzo desde 1957: étkezde judío-húngara con menú manuscrito, sifones de soda en la mesa y cierre a media tarde. SOLO mediodía y no todos los días — si la pilláis abierta, es historia comestible.", testimonio: { cita: "Comer en Kádár es viajar a 1970 sin máquina del tiempo: el sifón, el menú a mano, el señor que cobra en la puerta.", fuente: "Síntesis de reseñas locales, 2025" }, fiab: "ver" },
+          { nombre: "Kádár Étkezde", zona: "Klauzál tér 9 · 8 min", coords: [47.4998, 19.0618], nota: "Leyenda del almuerzo fundada en 1957 y reabierta en 2025 tras el cierre de la pandemia. Conserva el esqueleto del repertorio —paprikás, főzelék, cerdo guisado y sólet judeohúngaro—, los sifones y la vocación de mediodía, aunque la operación es ahora más pulida. Cerrado domingo y lunes: vuestro hueco real es el sábado al almuerzo.", testimonio: { cita: "No es una cápsula intacta: es una institución reabierta que negocia con su propia nostalgia. Eso la hace más interesante, no menos.", fuente: "Web oficial Kádár + Visit Hungary, ver. 10-jul-2026" }, fiab: "ok" },
+          { nombre: "Róma Ételbár", zona: "Csalogány u. · Buda", coords: [47.5070, 19.0326], nota: "Pequeña casa de comidas en Buda, manteles de cuadros y carta de clásicos sin coreografía turística. Id a por sopa, hígado, schnitzel o el plato del día; la gracia es comer bien en un lugar que todavía funciona como comedor de barrio.", fiab: "sug" },
+          { nombre: "Bödön Étkezde", zona: "Erzsébetváros · cerca del hotel", coords: [47.5016, 19.0719], nota: "Cantina directa para cuando queráis el vocabulario del glosario en forma de bandeja: főzelék, carnes empanadas, guisos y guarniciones a precio de diario. Menos mito que Kádár y, por eso, una foto más fiel del almuerzo urbano actual.", fiab: "sug" },
           { nombre: "Bors GasztroBár", zona: "Kazinczy u. · 9 min", coords: [47.4975, 19.0635], nota: "El mostrador de culto del barrio: sopas creativas y baguettes calientes con nombres de película. Barato, rápido, y la cola corta avanza sola.", fiab: "sug" },
           { nombre: "Karaván", zona: "Kazinczy u., pegado a Szimpla", coords: [47.4972, 19.0628], nota: "Patio de food trucks: lángos, hamburguesa de mangalica, opción vegana. La cena rápida oficial de antes de la ruta de bares.", fiab: "ok" },
           { nombre: "Lángos del Mercado Central", zona: "Planta alta del mercado", coords: [47.487, 19.0587], nota: "El clásico compartido entre turistas y abuelas: grasiento, enorme, feliz. Solo os cuadra el sábado por la mañana (domingo cierra).", fiab: "ok" },
@@ -312,6 +372,8 @@ const DATA = {
         sitios: [
           { nombre: "Gettó Gulyás", zona: "Wesselényi u. · 6 min", coords: [47.4995, 19.064], nota: "La carta es un desfile del canon: pörkölt de ciervo, paprikás, töltött káposzta, somlói de postre. Moderno sin traicionar nada. Reservad (Instagram/teléfono): pequeño y con fama justa. 4.000-6.000 HUF/persona.", testimonio: { cita: "El pörkölt de aquí es lo que tu abuela húngara imaginaria cocinaría.", fuente: "Síntesis de reseñas locales, 2025-26" }, fiab: "sug" },
           { nombre: "Rosenstein", zona: "Junto a Keleti · 12 min", coords: [47.5, 19.081], nota: "Institución familiar de cocina húngara-judía: sopa de ganso, guisos lentos, servicio de otra época. Para la cena «de mayores» del sábado si el cuerpo pide ceremonia. Reservar.", fiab: "sug" },
+          { nombre: "Macesz Bistro", zona: "Dob u. · barrio judío", coords: [47.4986, 19.0609], nota: "Cocina judeohúngara en versión de bistró: matzo ball soup, hígado de ganso, sólet y platos que explican por qué la gastronomía de Budapest no se entiende separando lo magiar de lo judío. Más refinado que una étkezde, menos solemne que Rosenstein.", fiab: "sug" },
+          { nombre: "Retek Bisztró", zona: "Nádor u. · centro", coords: [47.5025, 19.0508], nota: "Cocina húngara doméstica bien ejecutada en un comedor pequeño: sopa de palóc, paprikás y postres clásicos. Es la recomendación cómoda si estáis por el Parlamento y queréis tradición sin desplazaros; reservad porque su tamaño juega en contra.", fiab: "sug" },
         ]
       },
       {
@@ -323,6 +385,35 @@ const DATA = {
           { nombre: "Kürtőskalács al paso", zona: "Váci utca y alrededores del Bastión", coords: [47.4935, 19.0515], nota: "La chimenea caliente se compra en puestos callejeros — buscad los que la asan a la vista y ponen cola local. De canela la canónica.", fiab: "ok" },
         ]
       },
+    ]
+  },
+
+  /* ---------- HISTORIA ---------- */
+  historia: {
+    intro: "Budapest puede parecer una capital imperial que saltó directamente de 1914 a los ruin bars. Entre ambos hay cuarenta y cuatro años socialistas que transformaron vivienda, transporte, consumo y memoria. Esta sección no confunde curiosidad con absolución ni crítica con caricatura: intenta leer el proyecto, sus logros cotidianos, sus violencias y lo que la ciudad ha decidido conservar o desplazar.",
+    ensayo: {
+      titulo: "Del estalinismo al «socialismo de gulash»",
+      texto: "La Hungría de Mátyás Rákosi fue uno de los regímenes más duros del bloque: colectivización forzada, procesos, ÁVH y culto a Stalin. La revolución de octubre de 1956 reunió demandas obreras, estudiantiles, nacionales y socialistas democráticas; la intervención soviética la aplastó y llevó a János Kádár al poder. Su régimen comenzó con ejecuciones y cárcel, pero desde los sesenta buscó legitimidad mediante consumo, vivienda, ocio y una vigilancia menos asfixiante: «quien no está contra nosotros está con nosotros».\n\nEl llamado socialismo de gulash combinó pleno empleo, servicios públicos, pisos panel, vacaciones subvencionadas y una apertura económica mayor que la de muchos vecinos. También dejó deuda, escaseces, censura y límites políticos infranqueables. La vida cotidiana fue más gris y más habitable —a veces ambas cosas a la vez— que la postal de opresión total o la nostalgia retro. Hoy cada museo selecciona una memoria distinta: Memento Park desplaza símbolos, Retro celebra objetos y la Casa del Terror construye una genealogía nacional del sufrimiento.",
+      claves: [
+        { t: "1956", d: "No fue solo una revuelta anticomunista: hubo consejos obreros, comunistas reformistas, estudiantes, nacionalistas y una demanda común de soberanía y pluralismo." },
+        { t: "Kádárismo", d: "Un pacto social implícito: menos terror abierto y algo más de bienestar a cambio de desmovilización, obediencia y silencio sobre 1956." },
+        { t: "Panelház", d: "Vivienda industrializada en grandes conjuntos. Resolvió parte de una crisis habitacional real y produjo barrios con servicios; también monotonía, aislamiento y problemas de mantenimiento." },
+        { t: "Segunda economía", d: "Pequeña actividad privada y trabajos complementarios tolerados: una válvula que elevó el consumo y distinguió a Hungría dentro del bloque." },
+      ],
+      ruta: { titulo: "Ruta de memoria sin salir del centro · 2,5–3 h", texto: "Casa del Terror (entrar o leer el edificio) → Oktogon y M1 → memorial de 1956 junto al Parlamento → memorial soviético de Szabadság tér → Budapest Retro → tranvía a Corvin köz. Si queréis la pieza monumental, sustituid la última mitad por Memento Park; no intentéis encajarlo todo el mismo día." }
+    },
+    capas: [
+      { epoca: "La capital doble del imperio", años: "1873–1918", texto: "Buda, Pest y Óbuda se unifican en 1873 y el milenio magiar de 1896 produce metro, avenidas, cafés y edificios públicos a una velocidad feroz. La magnificencia fue también un proyecto nacional sobre una ciudad alemana, judía, eslovaca y magiar.", donde: "Andrássy, M1, Parlamento, Mercado Central, cafés históricos" },
+      { epoca: "Guerra, fascismo y sitio", años: "1919–1945", texto: "La breve República Soviética de 1919, el régimen de Horthy, las leyes antijudías, la ocupación alemana y la Cruz Flechada culminan en deportación y asesinato. El sitio de 1944–45 destruye la ciudad y mata a decenas de miles de civiles.", donde: "Zapatos del Danubio, sinagoga y gueto, Hospital de la Roca, Casa del Terror" },
+      { epoca: "Rákosi y el modelo estalinista", años: "1948–1956", texto: "Nacionalización, industrialización acelerada, colectivización y policía política. La estatua gigante de Stalin y los desfiles convertían el espacio urbano en pedagogía del poder; la escasez y la coerción hacían el resto.", donde: "Casa del Terror, restos y fotografías en Memento Park, antiguo Felvonulási tér" },
+      { epoca: "La revolución", años: "octubre–noviembre de 1956", texto: "Manifestaciones masivas, caída de símbolos, gobierno reformista de Imre Nagy y consejos obreros. La segunda intervención soviética aplasta la revolución; siguen ejecuciones, cárcel y exilio. Su memoria será prohibida, después recuperada y hoy disputada.", donde: "Corvin köz, Kossuth tér, estatua de Imre Nagy, parcela 301 del cementerio" },
+      { epoca: "Kádár y la normalidad negociada", años: "1963–1988", texto: "Amnistía parcial, reformas económicas, panelház, televisión, Balaton y un consumo modesto construyen el país «más alegre del barracón». La oposición existe pero es pequeña y vigilada; el bienestar se sostiene en parte con deuda y una segunda economía tolerada.", donde: "Budapest Retro, Kádár Étkezde, líneas de tranvía y barrios panel, Flippermúzeum" },
+      { epoca: "Transición y guerra de memorias", años: "1989–hoy", texto: "La república nace sin violencia, llegan privatización, desempleo y desigualdad. Las estatuas se desplazan en vez de destruirse, las instituciones reinterpretan el siglo XX y la política actual vuelve a escribir quién fue víctima, héroe o culpable.", donde: "Memento Park, Casa del Terror, Szabadság tér y sus memoriales enfrentados" },
+    ],
+    lecturas: [
+      { titulo: "Kádár's Kiss", autor: "Beverly James", nota: "Cultura visual y vida cotidiana en la Hungría socialista; muy útil para mirar más allá de los grandes dirigentes." },
+      { titulo: "The Guesthouse at the Sign of the Green Wreath", autor: "István Örkény", nota: "Relatos breves, absurdos y afilados del gran cronista húngaro del siglo XX." },
+      { titulo: "Budapest 1900", autor: "John Lukacs", nota: "Para entender la ciudad imperial y cosmopolita que el siglo XX heredó y rompió." },
     ]
   },
 
