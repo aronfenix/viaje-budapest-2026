@@ -1,5 +1,5 @@
 /* BUDAPEST 26 · service worker — offline-first */
-const VERSION = "bud26-v9";
+const VERSION = "bud26-v10";
 const PRECACHE = [
   "./",
   "./index.html",
@@ -14,6 +14,9 @@ const PRECACHE = [
   "./icons/icon-192.png",
   "./icons/icon-512.png",
   "./imgs/socialismo-hungaro.webp",
+  "./imgs/budapest-etkezde.webp",
+  "./imgs/budapest-ruin-bar.webp",
+  "./imgs/budapest-termas.webp",
   "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css",
   "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js",
 ];

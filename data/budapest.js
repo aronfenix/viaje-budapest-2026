@@ -104,14 +104,14 @@ const DATA = {
       { id: "castillo", nombre: "Buda · Castillo", corto: "BUDA", sub: "Colina, murallas y termas", barrios: ["castillo"], centro: [47.4962, 19.0396], radio: 1.55, path: "M40 60 Q165 20 285 75 L285 235 Q160 265 45 205 Z", label: [165, 120], extras: {
         beber: [{ planId: "zx-spiler-biergarten", nombre: "Spíler Biergarten", zona: "Dísz tér 8 · Castillo", coords: [47.4998, 19.0352], nota: "Jardín cervecero dentro del barrio del Castillo: craft, aguardientes y comida de beer garden. Más caro que Pest, pero evita bajar la colina solo para una ronda.", fiab: "ok", fuente: "Buda Castle, ver. 10-jul-2026" }]
       } },
-      { id: "gellert", nombre: "Gellért · Buda sur", corto: "GELLÉRT", sub: "Rudas, cerveza y A38", barrios: ["xi"], centro: [47.4835, 19.0510], radio: 1.9, path: "M55 245 Q160 215 285 250 L285 395 Q150 425 40 370 Z", label: [160, 305] },
+      { id: "gellert", nombre: "Gellért · Buda sur", corto: "GELLÉRT", sub: "Rudas, cerveza y A38", barrios: ["xi"], centro: [47.4835, 19.0510], radio: 1.9, path: "M55 245 Q160 215 285 250 L285 395 Q150 425 40 370 Z", label: [160, 305], visual: "budapest-termas", visualExt: "webp" },
       { id: "centro", nombre: "V · Belváros", corto: "BELVÁROS", sub: "Parlamento y Danubio", barrios: ["v"], centro: [47.5000, 19.0520], radio: 1.25, path: "M385 100 Q455 70 520 110 L515 250 Q450 275 385 235 Z", label: [450, 160] },
       { id: "andrassy", nombre: "VI · Andrássy", corto: "ANDRÁSSY", sub: "Imperio y memoria", barrios: ["vi"], centro: [47.5065, 19.0650], radio: 1.25, path: "M455 20 Q525 5 585 45 L555 155 L500 155 Z", label: [525, 75] },
-      { id: "erzsebet", nombre: "VII · Erzsébetváros", corto: "DISTRITO VII", sub: "Vuestra base y la noche", barrios: ["vii"], centro: [47.4995, 19.0640], radio: 1.45, path: "M525 165 Q615 130 695 185 L675 300 Q595 325 520 270 Z", label: [610, 215] },
+      { id: "erzsebet", nombre: "VII · Erzsébetváros", corto: "DISTRITO VII", sub: "Vuestra base y la noche", barrios: ["vii"], centro: [47.4995, 19.0640], radio: 1.45, path: "M525 165 Q615 130 695 185 L675 300 Q595 325 520 270 Z", label: [610, 215], visual: "budapest-ruin-bar", visualExt: "webp" },
       { id: "varosliget", nombre: "Városliget", corto: "VÁROSLIGET", sub: "Héroes y Széchenyi", barrios: ["varosliget"], centro: [47.5150, 19.0770], radio: 1.55, path: "M590 30 Q665 15 710 55 L700 150 Q640 165 570 135 Z", label: [645, 78], extras: {
         beber: [{ planId: "zx-rundo", nombre: "Rundo", zona: "Mimóza-domb · Városliget", coords: [47.5147, 19.0820], nota: "Bar relajado entre los árboles con café, cócteles y música. Es la salida natural de Széchenyi cuando todavía no queréis volver al distrito VII.", fiab: "ok", fuente: "Web oficial Rundo, ver. 10-jul-2026" }]
       } },
-      { id: "sur-pest", nombre: "Pest sur · VIII–IX", corto: "PEST SUR", sub: "1956, mercados y cerveza", barrios: ["xi"], centro: [47.4845, 19.0660], radio: 1.85, path: "M385 285 Q510 250 650 310 L630 415 L395 415 Z", label: [510, 340] },
+      { id: "sur-pest", nombre: "Pest sur · VIII–IX", corto: "PEST SUR", sub: "1956, mercados y cerveza", barrios: ["xi"], centro: [47.4845, 19.0660], radio: 1.85, path: "M385 285 Q510 250 650 310 L630 415 L395 415 Z", label: [510, 340], visual: "budapest-etkezde", visualExt: "webp" },
       { id: "memento", nombre: "Memento Park · Budafok", corto: "MEMENTO", sub: "Estatuas, bodegas y periferia", barrios: [], centro: [47.4269, 19.0002], radio: 1.2, path: "M8 335 Q60 310 115 335 L125 415 L10 415 Z", label: [65, 365], extras: {
         comer: [{ planId: "zx-promontor", nombre: "Promontor Kertvendéglő", zona: "Kossuth Lajos u. 28 · Budafok", coords: [47.4267, 19.0363], nota: "Casa de comidas con jardín, platos húngaros y vinos de Etyek-Buda. Está a un bus corto del parque: mejor convertir Memento en media excursión por Budafok que comer cualquier cosa junto a la carretera.", fiab: "ok", fuente: "Web oficial Promontor, ver. 10-jul-2026" }],
         beber: [{ planId: "zx-torley", nombre: "Törley Visitor Centre", zona: "Anna utca 7 · Budafok", coords: [47.4304, 19.0350], nota: "Bodegas de espumoso con 140 años. Solo con reserva; abre visitas el primer y segundo sábado del mes, y vuestro sábado 1 de agosto encaja. Es la copa con más contexto posible después de Memento Park.", fiab: "ver", fuente: "Törley oficial, ver. 10-jul-2026" }]
@@ -304,6 +304,7 @@ const DATA = {
       },
       {
         titulo: "Ruin bars: el original, con instrucciones",
+        img: "budapest-ruin-bar", imgExt: "webp",
         texto: "Los «romkocsma» (bares en ruinas) nacieron aquí, en edificios condenados del barrio judío. El original merece verse; el truco es CUÁNDO.",
         sitios: [
           { nombre: "Szimpla Kert", zona: "Kazinczy u. 14 · 10 min", coords: [47.497, 19.063], nota: "El primer ruin bar (2002) y aún el más alucinante como ESPACIO: patios, trastos, una bañera-sofá, un Trabant de mesa. Id entre semana o el sábado ANTES de las 20:00; a medianoche es Disneyland con cerveza.", testimonio: { cita: "Ve pronto, pide una cerveza, pasea el edificio como un museo, y lárgate a los bares de verdad cuando llegue la marabunta.", fuente: "Consejo repetido en r/budapest, 2025-26" }, fiab: "ok" },
@@ -328,7 +329,7 @@ const DATA = {
     intro: "La cocina húngara es la gran cocina imperial que Europa occidental nunca aprendió a pronunciar. Merece cinco minutos de teoría antes del primer menú — luego todo se pide solo.",
     bloques: [
       {
-        titulo: "La teoría: paprika, manteca y tejföl", img: "gulyas",
+        titulo: "La teoría: paprika, manteca y tejföl", img: "gulyas", imgExtra: "budapest-etkezde", imgExtraExt: "webp",
         texto: "Tres pilares sostienen esta mesa. El primero es la paprika: el pimentón llegó con los otomanos, los húngaros lo domesticaron en Szeged y Kalocsa, y desde el siglo XIX es la identidad nacional en polvo — dulce (édes) casi siempre, picante (erős) solo si lo pides. El segundo es la grasa con fundamento: esta cocina nació para pastores de la llanura y trabajadores del frío, y se nota en cada plato; venís a comer en serio, no a picar. El tercero es el tejföl, la nata agria que corona sopas, lángos y guisos — donde otros países ponen ketchup, Hungría pone nata agria, y tiene razón ella.\n\nDos costumbres útiles: la comida fuerte tradicional es la del MEDIODÍA (por eso existen las étkezde, cantinas de menú baratísimas que cierran a las 16:00), y en muchos restaurantes la cuenta llega con el servicio ya incluido — buscad la línea «szervizdíj» (12-15%) antes de dejar propina doble.",
         sitios: []
       },

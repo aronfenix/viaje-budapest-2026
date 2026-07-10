@@ -296,11 +296,12 @@
     const comidas = [...DATA.comer.bloques.flatMap((b) => b.sitios.map((s) => ({ ...s, bloque: b.titulo }))).filter((s) => nearZone(s.coords, z)), ...(z.extras?.comer || []).map((s) => ({ ...s, bloque: "Recomendación de la zona" }))].sort((a, b) => distKm(z.centro, a.coords) - distKm(z.centro, b.coords));
     const noche = [...DATA.noche.bloques.flatMap((b) => b.sitios.map((s) => ({ ...s, bloque: b.titulo }))).filter((s) => nearZone(s.coords, z)), ...(z.extras?.beber || []).map((s) => ({ ...s, bloque: "Recomendación de la zona" }))].sort((a, b) => distKm(z.centro, a.coords) - distKm(z.centro, b.coords));
     const contexto = barrios.length ? barrios.map((b) => `<article class="card zone-detail-lead reveal"><span class="chip chip-sec">${esc(b.tag)}</span><h3>${esc(b.nombre)}</h3><p>${esc(b.desc)}</p><div class="zone-facts"><div class="zone-fact"><b>Qué hacer</b>${esc(b.hacer)}</div><div class="zone-fact"><b>La capa histórica</b>${esc(b.dato)}</div></div></article>`).join("") : `<article class="card zone-detail-lead reveal"><h3>${esc(z.nombre)}</h3><p>${esc(z.sub)}</p><div class="zone-facts"><div class="zone-fact"><b>Cómo leerla</b>Esta pieza queda fuera del centro compacto: tratadla como una excursión con identidad propia.</div></div></article>`;
+    const visual = z.visual ? `<article class="card zone-visual reveal">${foto(z.visual, z.nombre, z.visualExt || "jpg")}<p class="foto-nota">Imagen editorial para situar el ambiente de la zona.</p></article>` : "";
     const group = (titulo, icono, items, render) => `<div class="zone-section-title"><h3>${icono} ${titulo}</h3><span>${items.length} cerca</span></div>${items.length ? items.map(render).join("") : '<p class="muted">No hay fichas cercanas todavía.</p>'}`;
     const ver = group("Qué ver", "◈", sitios, (s) => `<article class="zone-place reveal"><h4>${esc(s.nombre)} ${fiab(s.fiab)} ${planBtn(s.planId || s.id)}</h4><p>${esc(s.desc)}</p><p class="muted small">📍 ${esc(s.zona)} · ${esc(s.dur)} · ${esc(s.precio)}</p><p class="small"><a href="https://www.google.com/maps/search/?api=1&query=${s.coords.join(",")}" target="_blank" rel="noopener">navegar</a></p></article>`);
     const comer = group("Comer", "♨", comidas, (s) => `<article class="zone-place reveal"><h4>${esc(s.nombre)} ${fiab(s.fiab)} ${planBtn(s.planId || "c-" + slug(s.nombre))}</h4><p>${esc(s.nota)}</p><p class="muted small">${esc(s.bloque)} · 📍 ${esc(s.zona)}</p></article>`);
     const salir = group("Beber y salir", "☾", noche, (s) => `<article class="zone-place reveal"><h4>${esc(s.nombre)} ${fiab(s.fiab)} ${planBtn(s.planId || "n-" + slug(s.nombre))}</h4><p>${esc(s.nota)}</p><p class="muted small">${esc(s.bloque)} · 📍 ${esc(s.zona)}</p></article>`);
-    el.innerHTML = pageShell("zona", `${esc(z.sub)} · selección automática en un radio aproximado de ${String(z.radio).replace(".", ",")} km.`, contexto + ver + comer + salir);
+    el.innerHTML = pageShell("zona", `${esc(z.sub)} · selección automática en un radio aproximado de ${String(z.radio).replace(".", ",")} km.`, visual + contexto + ver + comer + salir);
     const h = el.querySelector(".page-head h2"); if (h) h.textContent = z.nombre;
   }
   function renderBoarding() {
@@ -367,7 +368,7 @@
   }
 
   /* ---------- fotos (Wikimedia, con degradación silenciosa) ---------- */
-  const foto = (id, alt) => id ? `<figure class="card-foto"><img src="imgs/${id}.jpg" alt="${esc(alt || "")}" loading="lazy" onerror="this.parentElement.remove()"></figure>` : "";
+  const foto = (id, alt, ext = "jpg") => id ? `<figure class="card-foto"><img src="imgs/${id}.${ext}" alt="${esc(alt || "")}" loading="lazy" onerror="this.parentElement.remove()"></figure>` : "";
 
   /* ---------- QUÉ HACER + IDEAS POR DÍA ---------- */
   function metDia(iso) {
@@ -481,7 +482,8 @@
   const testimonioHtml = (t) => t ? `<blockquote class="testimonio">${esc(t.cita)}<span class="t-src">— ${esc(t.fuente)}</span></blockquote>` : "";
   function bloquesRender(bloques, pfx) {
     return bloques.map((b) => `<article class="card reveal">
-      ${foto(b.img, b.titulo)}
+      ${foto(b.img, b.titulo, b.imgExt || "jpg")}
+      ${foto(b.imgExtra, b.titulo, b.imgExtraExt || "jpg")}
       <h3>${esc(b.titulo)}</h3>${b.texto.split("\n\n").map((t) => `<p>${esc(t)}</p>`).join("")}
       ${b.glosario ? `<div class="glosario">${b.glosario.map((g) => `<div class="glo-item"><b>${esc(g.t)}</b><span>${esc(g.d)}</span></div>`).join("")}</div>` : ""}
       ${b.sitios.map((s) => `<h4>${esc(s.nombre)} ${fiab(s.fiab)} ${planBtn(pfx + slug(s.nombre))}</h4>
