@@ -369,6 +369,8 @@
 
   /* ---------- fotos (Wikimedia, con degradación silenciosa) ---------- */
   const foto = (id, alt, ext = "jpg") => id ? `<figure class="card-foto"><img src="imgs/${id}.${ext}" alt="${esc(alt || "")}" loading="lazy" onerror="this.parentElement.remove()"></figure>` : "";
+  const syncFolds = (root) => requestAnimationFrame(() => root.querySelectorAll("details.fold-card").forEach((d) => { d.open = matchMedia("(min-width: 681px)").matches; }));
+  matchMedia("(min-width: 681px)").addEventListener("change", () => syncFolds(document));
 
   /* ---------- QUÉ HACER + IDEAS POR DÍA ---------- */
   function metDia(iso) {
@@ -481,21 +483,23 @@
   /* ---------- COMER / NOCHE ---------- */
   const testimonioHtml = (t) => t ? `<blockquote class="testimonio">${esc(t.cita)}<span class="t-src">— ${esc(t.fuente)}</span></blockquote>` : "";
   function bloquesRender(bloques, pfx) {
-    return bloques.map((b) => `<article class="card reveal">
-      ${foto(b.img, b.titulo, b.imgExt || "jpg")}
-      ${foto(b.imgExtra, b.titulo, b.imgExtraExt || "jpg")}
-      <h3>${esc(b.titulo)}</h3>${b.texto.split("\n\n").map((t) => `<p>${esc(t)}</p>`).join("")}
-      ${b.glosario ? `<div class="glosario">${b.glosario.map((g) => `<div class="glo-item"><b>${esc(g.t)}</b><span>${esc(g.d)}</span></div>`).join("")}</div>` : ""}
-      ${b.sitios.map((s) => `<h4>${esc(s.nombre)} ${fiab(s.fiab)} ${planBtn(pfx + slug(s.nombre))}</h4>
-        <p class="muted small">📍 ${esc(s.zona)}</p>
-        <div class="sitio-meta">${walkChip(s.coords)}</div>
-        <p>${esc(s.nota)}</p>${testimonioHtml(s.testimonio)}
-        ${s.fuente ? `<p class="fuente">${esc(s.fuente)}</p>` : ""}
-        ${s.coords ? `<p class="small"><a href="#/mapa" data-fly="${s.coords.join(",")}">mapa</a> · <a href="https://www.google.com/maps/search/?api=1&query=${s.coords.join(",")}" target="_blank" rel="noopener">navegar</a></p>` : ""}`).join("")}
-    </article>`).join("");
+    const open = matchMedia("(min-width: 681px)").matches ? " open" : "";
+    return bloques.map((b) => `<details class="card reveal fold-card ${pfx === "c-" ? "food-block" : ""}"${open}>
+      <summary class="fold-summary"><span>${b.tag ? `<span class="food-kind">${esc(b.tag)}</span>` : ""}<h3>${esc(b.titulo)}</h3><small>${esc(b.resumen || b.texto.split(".")[0] + ".")}</small></span><i aria-hidden="true">＋</i></summary>
+      <div class="fold-body">
+        ${foto(b.img, b.titulo, b.imgExt || "jpg")}${foto(b.imgExtra, b.titulo, b.imgExtraExt || "jpg")}
+        ${b.texto.split("\n\n").map((t) => `<p>${esc(t)}</p>`).join("")}
+        ${b.glosario ? `<div class="glosario">${b.glosario.map((g) => `<div class="glo-item"><b>${esc(g.t)}</b><span>${esc(g.d)}</span></div>`).join("")}</div>` : ""}
+        ${b.sitios.map((s) => `<section class="food-place ${s.veredicto ? "food-picked" : ""}"><div class="food-place-head"><h4>${esc(s.nombre)} ${fiab(s.fiab)}</h4>${planBtn(pfx + slug(s.nombre))}</div>
+          <div class="food-chips">${s.veredicto ? `<span>${esc(s.veredicto)}</span>` : ""}${s.precio ? `<span>${esc(s.precio)}</span>` : ""}<span>📍 ${esc(s.zona)}</span></div>
+          <div class="sitio-meta">${walkChip(s.coords)}</div>${s.pedir ? `<p class="food-order"><b>Pedid esto:</b> ${esc(s.pedir)}</p>` : ""}
+          <p>${esc(s.nota)}</p>${testimonioHtml(s.testimonio)}${s.fuente ? `<p class="fuente">${esc(s.fuente)}</p>` : ""}
+          ${s.coords ? `<p class="small"><a href="#/mapa" data-fly="${s.coords.join(",")}">mapa</a> · <a href="https://www.google.com/maps/search/?api=1&query=${s.coords.join(",")}" target="_blank" rel="noopener">navegar</a></p>` : ""}</section>`).join("")}
+      </div>
+    </details>`).join("");
   }
-  function renderComer(el) { el.innerHTML = pageShell("comer", esc(DATA.comer.intro), bloquesRender(DATA.comer.bloques, "c-")); }
-  function renderNoche(el) { el.innerHTML = pageShell("noche", esc(DATA.noche.intro), bloquesRender(DATA.noche.bloques, "n-")); }
+  function renderComer(el) { el.innerHTML = pageShell("comer", esc(DATA.comer.intro), bloquesRender(DATA.comer.bloques, "c-")); syncFolds(el); }
+  function renderNoche(el) { el.innerHTML = pageShell("noche", esc(DATA.noche.intro), bloquesRender(DATA.noche.bloques, "n-")); syncFolds(el); }
 
   /* ---------- HISTORIA ---------- */
   function renderHistoria(el) {
@@ -503,17 +507,29 @@
       <span class="tl-years">${esc(c.años)}</span><h3>${esc(c.epoca)}</h3>
       <p>${esc(c.texto)}</p><p class="tl-donde"><b>Se ve en:</b> ${esc(c.donde)}</p>
     </div>`).join("");
+    const ruta = DATA.historia.ensayo.ruta;
+    const rutaHtml = `<article class="card memoria-route reveal">${foto(ruta.img, ruta.titulo, ruta.imgExt || "jpg")}
+      <span class="foto-nota">Imagen editorial generada · la ruta se dibuja sobre el mapa real</span>
+      <span class="food-kind">Ruta temática</span><h3>${esc(ruta.titulo)}</h3><div class="sitio-meta"><span>⏱ <b>${esc(ruta.dur)}</b></span><span>📏 ${esc(ruta.dist)}</span></div>
+      <p>${esc(ruta.texto)}</p><ol class="memory-stops">${ruta.paradas.map((p) => `<li><b>${esc(p.n)}</b><span>${esc(p.txt)}</span></li>`).join("")}</ol>
+      <button class="ruta-btn" data-ruta-memoria>🗺 Dibujar la ruta socialista en el mapa</button></article>`;
     const ensayo = `<article class="card historia-ensayo reveal">
       <img src="imgs/socialismo-hungaro.webp" alt="Interpretación visual de la vida cotidiana en la Budapest socialista de los años setenta">
       <span class="foto-nota">Imagen editorial generada · recreación histórica, no fotografía documental</span>
       <h3>${esc(DATA.historia.ensayo.titulo)}</h3>
       ${DATA.historia.ensayo.texto.split("\n\n").map((t) => `<p>${esc(t)}</p>`).join("")}
       <div class="glosario">${DATA.historia.ensayo.claves.map((g) => `<div class="glo-item"><b>${esc(g.t)}</b><span>${esc(g.d)}</span></div>`).join("")}</div>
-      <h4>${esc(DATA.historia.ensayo.ruta.titulo)}</h4><p>${esc(DATA.historia.ensayo.ruta.texto)}</p>
     </article>`;
     const lecturas = `<article class="card reveal"><h3>Para seguir el hilo</h3>${DATA.historia.lecturas.map((l) => `<p><b>${esc(l.titulo)}</b> — ${esc(l.autor)}<br><span class="muted small">${esc(l.nota)}</span></p>`).join("")}</article>`;
-    el.innerHTML = pageShell("historia", esc(DATA.historia.intro), ensayo + `<div class="tl">${capas}</div>` + lecturas);
+    el.innerHTML = pageShell("historia", esc(DATA.historia.intro), ensayo + rutaHtml + `<div class="tl">${capas}</div>` + lecturas);
   }
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest("[data-ruta-memoria]")) return;
+    const r = DATA.historia.ensayo.ruta;
+    window.__route = r.paradas.map((p, i) => ({ coords: p.coords, n: i + 1, nombre: p.n }));
+    window.__routeSinCasa = true;
+    location.hash = "#/mapa";
+  });
 
   /* ---------- CUADERNO ---------- */
   const CATS = ["Garito descubierto", "Comer/beber", "Idea", "Recuerdo"];

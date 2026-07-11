@@ -329,12 +329,12 @@ const DATA = {
     intro: "La cocina húngara es la gran cocina imperial que Europa occidental nunca aprendió a pronunciar. Merece cinco minutos de teoría antes del primer menú — luego todo se pide solo.",
     bloques: [
       {
-        titulo: "La teoría: paprika, manteca y tejföl", img: "gulyas", imgExtra: "budapest-etkezde", imgExtraExt: "webp",
+        titulo: "La teoría: paprika, manteca y tejföl", img: "gulyas", imgExtra: "budapest-etkezde", imgExtraExt: "webp", tag: "Antes de pedir", resumen: "Cinco minutos para entender la carta y no confundir gulyás con pörkölt.",
         texto: "Tres pilares sostienen esta mesa. El primero es la paprika: el pimentón llegó con los otomanos, los húngaros lo domesticaron en Szeged y Kalocsa, y desde el siglo XIX es la identidad nacional en polvo — dulce (édes) casi siempre, picante (erős) solo si lo pides. El segundo es la grasa con fundamento: esta cocina nació para pastores de la llanura y trabajadores del frío, y se nota en cada plato; venís a comer en serio, no a picar. El tercero es el tejföl, la nata agria que corona sopas, lángos y guisos — donde otros países ponen ketchup, Hungría pone nata agria, y tiene razón ella.\n\nDos costumbres útiles: la comida fuerte tradicional es la del MEDIODÍA (por eso existen las étkezde, cantinas de menú baratísimas que cierran a las 16:00), y en muchos restaurantes la cuenta llega con el servicio ya incluido — buscad la línea «szervizdíj» (12-15%) antes de dejar propina doble.",
         sitios: []
       },
       {
-        titulo: "El diccionario del menú",
+        titulo: "El diccionario del menú", tag: "Qué es cada cosa", resumen: "Catorce palabras que descifran casi cualquier carta húngara.",
         texto: "Con estas catorce palabras se descifra el 90% de cualquier carta húngara:",
         sitios: [],
         glosario: [
@@ -355,11 +355,11 @@ const DATA = {
         ]
       },
       {
-        titulo: "Dónde: el diario (barato y verdadero)", img: "langos",
+        titulo: "Dónde: el diario (barato y verdadero)", img: "langos", tag: "Almuerzo popular", resumen: "Étkezde, mercados y mostradores: rápido, barato y con repertorio doméstico.",
         texto: "La comida de diario húngara vive en cantinas, mercados y mostradores. Es la mitad barata y la mitad más auténtica de la experiencia:",
         sitios: [
           { nombre: "Frici Papa", zona: "Király u. · 7 min", coords: [47.5005, 19.063], nota: "Kifőzde (casa de comidas) de manual: manteles sencillos, carta larga de guisos del día y cuentas de 2.500-3.500 HUF por persona. Aquí se come lo que comen los del barrio, al precio que pagan los del barrio.", fiab: "sug" },
-          { nombre: "Kádár Étkezde", zona: "Klauzál tér 9 · 8 min", coords: [47.4998, 19.0618], nota: "Leyenda del almuerzo fundada en 1957 y reabierta en 2025 tras el cierre de la pandemia. Conserva el esqueleto del repertorio —paprikás, főzelék, cerdo guisado y sólet judeohúngaro—, los sifones y la vocación de mediodía, aunque la operación es ahora más pulida. Cerrado domingo y lunes: vuestro hueco real es el sábado al almuerzo.", testimonio: { cita: "No es una cápsula intacta: es una institución reabierta que negocia con su propia nostalgia. Eso la hace más interesante, no menos.", fuente: "Web oficial Kádár + Visit Hungary, ver. 10-jul-2026" }, fiab: "ok" },
+          { nombre: "Kádár Étkezde", zona: "Klauzál tér 9 · 8 min", coords: [47.4998, 19.0618], veredicto: "La elección", precio: "3.000–5.000 HUF", pedir: "El plato del día, főzelék o paprikás y agua del sifón", nota: "Leyenda del almuerzo fundada en 1957 y reabierta en 2025 tras el cierre de la pandemia. Conserva el esqueleto del repertorio —paprikás, főzelék, cerdo guisado y sólet judeohúngaro—, los sifones y la vocación de mediodía, aunque la operación es ahora más pulida. Cerrado domingo y lunes: vuestro hueco real es el sábado al almuerzo.", testimonio: { cita: "No es una cápsula intacta: es una institución reabierta que negocia con su propia nostalgia. Eso la hace más interesante, no menos.", fuente: "Web oficial Kádár + Visit Hungary, ver. 10-jul-2026" }, fiab: "ok" },
           { nombre: "Róma Ételbár", zona: "Csalogány u. · Buda", coords: [47.5070, 19.0326], nota: "Pequeña casa de comidas en Buda, manteles de cuadros y carta de clásicos sin coreografía turística. Id a por sopa, hígado, schnitzel o el plato del día; la gracia es comer bien en un lugar que todavía funciona como comedor de barrio.", fiab: "sug" },
           { nombre: "Bödön Étkezde", zona: "Erzsébetváros · cerca del hotel", coords: [47.5016, 19.0719], nota: "Cantina directa para cuando queráis el vocabulario del glosario en forma de bandeja: főzelék, carnes empanadas, guisos y guarniciones a precio de diario. Menos mito que Kádár y, por eso, una foto más fiel del almuerzo urbano actual.", fiab: "sug" },
           { nombre: "Bors GasztroBár", zona: "Kazinczy u. · 9 min", coords: [47.4975, 19.0635], nota: "El mostrador de culto del barrio: sopas creativas y baguettes calientes con nombres de película. Barato, rápido, y la cola corta avanza sola.", fiab: "sug" },
@@ -368,17 +368,17 @@ const DATA = {
         ]
       },
       {
-        titulo: "Dónde: la cena de sentarse", img: "porkolt",
+        titulo: "Dónde: la cena de sentarse", img: "porkolt", tag: "Cena con reserva", resumen: "El canon húngaro en mesas donde merece la pena alargar la noche.",
         texto: "Para la noche de mantel — la gama media-alta húngara cuesta como una pizzería de Madrid:",
         sitios: [
-          { nombre: "Gettó Gulyás", zona: "Wesselényi u. · 6 min", coords: [47.4995, 19.064], nota: "La carta es un desfile del canon: pörkölt de ciervo, paprikás, töltött káposzta, somlói de postre. Moderno sin traicionar nada. Reservad (Instagram/teléfono): pequeño y con fama justa. 4.000-6.000 HUF/persona.", testimonio: { cita: "El pörkölt de aquí es lo que tu abuela húngara imaginaria cocinaría.", fuente: "Síntesis de reseñas locales, 2025-26" }, fiab: "sug" },
+          { nombre: "Gettó Gulyás", zona: "Wesselényi u. · 6 min", coords: [47.4995, 19.064], veredicto: "Cena canónica", precio: "4.000–6.000 HUF", pedir: "Pörkölt de ciervo o paprikás y somlói para compartir", nota: "La carta es un desfile del canon: pörkölt de ciervo, paprikás, töltött káposzta, somlói de postre. Moderno sin traicionar nada. Reservad (Instagram/teléfono): pequeño y con fama justa. 4.000-6.000 HUF/persona.", testimonio: { cita: "El pörkölt de aquí es lo que tu abuela húngara imaginaria cocinaría.", fuente: "Síntesis de reseñas locales, 2025-26" }, fiab: "sug" },
           { nombre: "Rosenstein", zona: "Junto a Keleti · 12 min", coords: [47.5, 19.081], nota: "Institución familiar de cocina húngara-judía: sopa de ganso, guisos lentos, servicio de otra época. Para la cena «de mayores» del sábado si el cuerpo pide ceremonia. Reservar.", fiab: "sug" },
           { nombre: "Macesz Bistro", zona: "Dob u. · barrio judío", coords: [47.4986, 19.0609], nota: "Cocina judeohúngara en versión de bistró: matzo ball soup, hígado de ganso, sólet y platos que explican por qué la gastronomía de Budapest no se entiende separando lo magiar de lo judío. Más refinado que una étkezde, menos solemne que Rosenstein.", fiab: "sug" },
           { nombre: "Retek Bisztró", zona: "Nádor u. · centro", coords: [47.5025, 19.0508], nota: "Cocina húngara doméstica bien ejecutada en un comedor pequeño: sopa de palóc, paprikás y postres clásicos. Es la recomendación cómoda si estáis por el Parlamento y queréis tradición sin desplazaros; reservad porque su tamaño juega en contra.", fiab: "sug" },
         ]
       },
       {
-        titulo: "Dulces y cafés con techo", img: "dobos",
+        titulo: "Dulces y cafés con techo", img: "dobos", tag: "Merienda imperial", resumen: "Tarta, café y una hora bajo techos que compiten con los palacios.",
         texto: "Budapest tuvo a principios del XX más cafés que Viena, y los que quedan son palacios. El ritual: tarta + café + hora y media sin que nadie os mire mal.",
         sitios: [
           { nombre: "New York Café", zona: "A 3 min del hotel", coords: [47.4984, 19.0705], nota: "El barroco dorado con frescos que se autoproclama «el café más bonito del mundo» — y casi. Vuestra ventaja logística es criminal: id el lunes a las 8:00, cuando abre, y desayunad sin la cola de dos horas.", fiab: "ver" },
@@ -401,7 +401,18 @@ const DATA = {
         { t: "Panelház", d: "Vivienda industrializada en grandes conjuntos. Resolvió parte de una crisis habitacional real y produjo barrios con servicios; también monotonía, aislamiento y problemas de mantenimiento." },
         { t: "Segunda economía", d: "Pequeña actividad privada y trabajos complementarios tolerados: una válvula que elevó el consumo y distinguió a Hungría dentro del bloque." },
       ],
-      ruta: { titulo: "Ruta de memoria sin salir del centro · 2,5–3 h", texto: "Casa del Terror (entrar o leer el edificio) → Oktogon y M1 → memorial de 1956 junto al Parlamento → memorial soviético de Szabadság tér → Budapest Retro → tranvía a Corvin köz. Si queréis la pieza monumental, sustituid la última mitad por Memento Park; no intentéis encajarlo todo el mismo día." }
+      ruta: {
+        titulo: "De Rákosi a Kádár · ruta socialista", dur: "3–4 h", dist: "≈5,5 km + tranvía", img: "ruta-socialista-budapest", imgExt: "webp",
+        texto: "Una ruta compacta para leer poder, revolución, vida cotidiana y guerra de memorias. Pone juntos el terror estalinista, los consejos de 1956, la normalidad negociada de Kádár y la interpretación posterior a 1989.",
+        paradas: [
+          { n: "Casa del Terror", txt: "El edificio de la Cruz Flechada y la ÁVH; mirad también la museografía como argumento político contemporáneo.", coords: [47.5069, 19.0652] },
+          { n: "Oktogon y M1", txt: "La ciudad imperial reutilizada por el socialismo y el transporte colectivo como continuidad cotidiana.", coords: [47.5050, 19.0631] },
+          { n: "Kossuth tér", txt: "El memorial subterráneo del 25 de octubre de 1956 y el Parlamento como escenario de soberanía disputada.", coords: [47.5072, 19.0468] },
+          { n: "Szabadság tér", txt: "El monumento soviético aún en pie y otros memoriales enfrentados en la misma plaza.", coords: [47.5042, 19.0504] },
+          { n: "Budapest Retro", txt: "Objetos, televisión, vivienda y consumo: la vida que queda fuera de las historias exclusivamente represivas.", coords: [47.5044, 19.0507] },
+          { n: "Corvin köz", txt: "El tejido urbano de la resistencia armada de 1956 y las sucesivas reescrituras de sus combatientes.", coords: [47.4858, 19.0705] }
+        ]
+      }
     },
     capas: [
       { epoca: "La capital doble del imperio", años: "1873–1918", texto: "Buda, Pest y Óbuda se unifican en 1873 y el milenio magiar de 1896 produce metro, avenidas, cafés y edificios públicos a una velocidad feroz. La magnificencia fue también un proyecto nacional sobre una ciudad alemana, judía, eslovaca y magiar.", donde: "Andrássy, M1, Parlamento, Mercado Central, cafés históricos" },
