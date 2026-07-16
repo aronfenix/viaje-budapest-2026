@@ -135,7 +135,7 @@ const DATA = {
     {
       fecha: "2026-08-01", nombre: "Sábado · el grande",
       dia: [
-        "Mañana de musts con fresco: Parlamento (si conseguisteis reserva), Zapatos del Danubio y Basílica. Todo seguido a pie por la orilla.",
+        "Mañana de orilla con fresco: Zapatos del Danubio, exterior del Parlamento (por dentro os toca mañana — ya reservado) y Basílica, todo seguido a pie. Si Víctor os convenció, subid a la cúpula de la Basílica: efectivo en mano.",
         "Mercado Central antes de las 15:00 (los sábados cierra pronto): lángos arriba y paprika para casa.",
         "💡 Tarde: cruzar el Puente de las Cadenas y subir al Bastión de los Pescadores hacia el atardecer — la postal de Budapest con la mejor luz.",
       ],
@@ -147,8 +147,10 @@ const DATA = {
     {
       fecha: "2026-08-02", nombre: "Domingo · el bueno",
       dia: [
-        "Mañana termal: Széchenyi (llegar ANTES de las 10 o después de las 16; el mediodía de domingo es sopa de gente). Combinable con Plaza de los Héroes y Andrássy de vuelta.",
-        "💡 Ojo: el Mercado Central cierra los domingos. Comida alternativa: Gettó Gulyás (reservad) o Bors GasztroBár.",
+        "🎟 14:15 — PARLAMENTO (reservado, con Juan). Estad en el centro de visitantes de Kossuth tér 20-30 min antes con documento; la visita dura ~45 min-1 h.",
+        "Mañana termal ANTES del Parlamento: Széchenyi de 8:00 a ~11:30 (el madrugón compensa: el mediodía de domingo es sopa de gente). M1 de vuelta y comida temprana.",
+        "💡 Comida pre-Parlamento con lógica: Hungarikum Bisztró está a 5 min de Kossuth tér (recomendación de Víctor — reservad y pedid la crepe de pollo). Ojo: el Mercado Central cierra los domingos.",
+        "Después del Parlamento: los Zapatos del Danubio están al lado si no cayeron el sábado, y el tranvía 2 os devuelve al centro por la orilla.",
       ],
       noche: [
         "♪ Domingo con cartel del rollo correcto: Patriarchy en ROBOT — concierto en vuestro club de cabecera a 10 min del hotel. Difícil pedirle más a un domingo.",
@@ -180,8 +182,8 @@ const DATA = {
       coords: [47.5076, 19.0455], dur: "1 h (visita guiada)", precio: "7.000 HUF (adultos UE) · reservar en jegymester.hu/parlament",
       horario: { 1: [8, 16], 2: [8, 16], 3: [8, 16], 4: [8, 16], 5: [8, 16], 6: [8, 16], 7: [8, 16] },
       desc: "El edificio-espectáculo del Danubio: neogótico desmesurado, 691 salas, la Santa Corona custodiada por guardias con sable. La visita guiada (hay en español algunos horarios) es de las que justifican madrugar.",
-      consejo: "⚠ SE AGOTA con 2-4 semanas de antelación en verano. Reservad HOY para el sábado 1. Si no hay, la vista desde fuera —y desde el tranvía 2— sigue siendo el mejor gratis de Europa.",
-      fiab: "ok", fuente: "parlament.hu · ver. 8-jul-2026"
+      consejo: "✓ RESERVADO: domingo 2 de agosto, 14:15 (Álvaro + Juan). Presentarse en el centro de visitantes de Kossuth tér con 20-30 min de margen y documento de identidad. Bolsos grandes, mejor dejarlos en el hotel.",
+      fiab: "ok", fuente: "parlament.hu · reserva hecha, jul-2026"
     },
     {
       id: "bastion", nombre: "Bastión de los Pescadores + Matthias", zona: "Colina del Castillo (Buda)",
@@ -196,7 +198,8 @@ const DATA = {
       coords: [47.5009, 19.054], dur: "45 min (+mirador)", precio: "Donativo/entrada ≈1.200–2.300 HUF; cúpula aparte",
       horario: { 1: [9, 17.75], 2: [9, 17.75], 3: [9, 17.75], 4: [9, 17.75], 5: [9, 17.75], 6: [9, 17.75], 7: [13, 17.75] },
       desc: "La cúpula que os saludará desde media ciudad (96 metros exactos, como el Parlamento: empate patriótico deliberado). El mirador de la cúpula da la mejor panorámica del lado Pest.",
-      fiab: "ver", fuente: "Horarios orientativos; domingo abre tras las misas"
+      consejo: "Tip de Víctor: subid al mirador si hace bueno — pero llevad EFECTIVO (con cambiar ~10 € va para las dos entradas), y la iglesia por dentro cobra un «donativo» de ~1 € que los vale.",
+      fiab: "ver", fuente: "Horarios orientativos + experiencia de Víctor, jul-2026"
     },
     {
       id: "cadenas", nombre: "Puente de las Cadenas", zona: "Danubio",
@@ -321,6 +324,15 @@ const DATA = {
           { nombre: "MONYO Tap House", zona: "Kálvin tér · 15 min", coords: [47.4892, 19.0617], nota: "La barra céntrica de una de las cerveceras craft que cambió la escena local. Buena parada para entender qué hace Hungría hoy más allá de Dreher: IPA, sour y ediciones de temporada, con vuelos de cata si queréis probar sin pedir pintas enteras.", fiab: "sug" },
         ]
       },
+      {
+        titulo: "💬 De parte de Víctor", tag: "Recos de amigo",
+        resumen: "Un amigo de Juan que ya se pateó la ciudad manda sus garitos probados.",
+        texto: "Víctor (amigo de Juan) estuvo aquí y mandó deberes por Instagram. Recomendaciones de primera mano, probadas por un humano de confianza:",
+        sitios: [
+          { nombre: "Mazel Tov", zona: "Akácfa u. 47 · 8 min", coords: [47.5008, 19.0655], nota: "«Una especie de ruin bar pero nada que ver por dentro»: patio industrial luminoso con vegetación, cocina israelí-libanesa seria y música en directo muchas noches. El ruin bar que se arregló para cenar — reservad si vais a comer.", testimonio: { cita: "Es una especie de ruin bar pero nada que ver dentro, y suele tener música en directo.", fuente: "Víctor, jul 2026" }, fiab: "ok" },
+          { nombre: "FIRST Local Craft Beer and Kitchen", zona: "Centro (buscad el nombre exacto en Maps)", coords: null, nota: "El apunte cervecero de Víctor: «más tranqui, de cervezas». Craft local con cocina, para una noche de conversación sin decibelios. Tel. +36 70 239 7700.", fiab: "ver" },
+        ]
+      },
     ]
   },
 
@@ -375,6 +387,15 @@ const DATA = {
           { nombre: "Rosenstein", zona: "Junto a Keleti · 12 min", coords: [47.5, 19.081], nota: "Institución familiar de cocina húngara-judía: sopa de ganso, guisos lentos, servicio de otra época. Para la cena «de mayores» del sábado si el cuerpo pide ceremonia. Reservar.", fiab: "sug" },
           { nombre: "Macesz Bistro", zona: "Dob u. · barrio judío", coords: [47.4986, 19.0609], nota: "Cocina judeohúngara en versión de bistró: matzo ball soup, hígado de ganso, sólet y platos que explican por qué la gastronomía de Budapest no se entiende separando lo magiar de lo judío. Más refinado que una étkezde, menos solemne que Rosenstein.", fiab: "sug" },
           { nombre: "Retek Bisztró", zona: "Nádor u. · centro", coords: [47.5025, 19.0508], nota: "Cocina húngara doméstica bien ejecutada en un comedor pequeño: sopa de palóc, paprikás y postres clásicos. Es la recomendación cómoda si estáis por el Parlamento y queréis tradición sin desplazaros; reservad porque su tamaño juega en contra.", fiab: "sug" },
+        ]
+      },
+      {
+        titulo: "💬 Recomendaciones de Víctor", tag: "Recos de amigo", resumen: "Los sitios de comer que manda un amigo de Juan que ya estuvo: probados y con plato concreto.",
+        texto: "Víctor (amigo de Juan) se pateó Budapest y mandó lista por Instagram, con plato incluido. Oro de primera mano:",
+        sitios: [
+          { nombre: "Frici Papa", zona: "Király u. · 7 min", coords: [47.5005, 19.063], pedir: "Lo que toque del día — «baratísimo y comida típica y buena».", nota: "Doble validación: ya estaba en esta guía como kifőzde de manual y Víctor lo confirma desde la experiencia. Cuentas de 2.500-3.500 HUF.", testimonio: { cita: "Frici Papa: baratísimo y comida típica y buena.", fuente: "Víctor, jul 2026" }, fiab: "ok" },
+          { nombre: "Menza", zona: "Liszt Ferenc tér · 10 min", coords: [47.5028, 19.064], pedir: "Pato con risotto de champiñones 👌", nota: "En la plaza con más terrazas del VI (Liszt Ferenc tér, junto a Andrássy): húngaro actualizado en un local de diseño retro-socialista. Consejo de Víctor: reservad por la web para no tener problema.", testimonio: { cita: "Está chulo y si te gusta pide pato con risotto de champiñones.", fuente: "Víctor, jul 2026" }, fiab: "ok" },
+          { nombre: "Hungarikum Bisztró", zona: "Steindl Imre u., a 5 min del Parlamento", coords: [47.5052, 19.048], pedir: "La «especie de crepe de pollo» — es la Hortobágyi palacsinta del diccionario.", nota: "Comida típica «buenísima» y trato encantador, pegado a Kossuth tér. Os cuadra PERFECTO antes del Parlamento del domingo 14:15 — reservad, es pequeño y famoso.", testimonio: { cita: "Buenísimo, comida típica y muy majas las chicas. Está cerca del parlamento.", fuente: "Víctor, jul 2026" }, fiab: "ok" },
         ]
       },
       {
@@ -446,9 +467,11 @@ const DATA = {
       { es: "No hablo húngaro", hu: "Nem beszélek magyarul", pron: "nem BE-sé-lek MO-dyo-rul" },
     ],
     checklist: [
-      "⚠ YA: reservar Parlamento (jegymester.hu/parlament) — se agota",
+      "✓ Parlamento RESERVADO: domingo 2, 14:15 — llevar la confirmación y documento",
       "⚠ YA: entradas Rudas nocturno del viernes 31 (rudasfurdo.hu)",
       "Mirar entradas: Patriarchy en ROBOT (dom 2) · Moby (sáb 1) · Ásgeir en A38 (vie 31)",
+      "Reservar Hungarikum Bisztró para el domingo ~12:30 (antes del Parlamento)",
+      "Reservar Menza por la web (consejo de Víctor)",
       "Bañador y chanclas (×2 humanos)",
       "BKK 72 h al llegar (BudapestGO o máquina morada)",
       "Pasaporte o DNI (Hungría es UE: vale el DNI)",
