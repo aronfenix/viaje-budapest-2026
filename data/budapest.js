@@ -147,8 +147,9 @@ const DATA = {
     {
       fecha: "2026-08-02", nombre: "Domingo · el bueno",
       dia: [
-        "🎟 14:15 — PARLAMENTO (reservado, con Juan). Estad en el centro de visitantes de Kossuth tér 20-30 min antes con documento; la visita dura ~45 min-1 h.",
-        "Mañana termal ANTES del Parlamento: Széchenyi de 8:00 a ~11:30 (el madrugón compensa: el mediodía de domingo es sopa de gente). M1 de vuelta y comida temprana.",
+        "🥵 Hoy ~37°: el día más caluroso. La suerte es que vuestro plan ya esquiva el infierno de mediodía — agua dentro (termas), edificio con aire (Parlamento) y sombra el resto.",
+        "🎟 14:15 — PARLAMENTO (reservado, con Juan). Estad en el centro de visitantes de Kossuth tér 20-30 min antes con documento; la visita dura ~45 min-1 h. Aire acondicionado bendito.",
+        "Mañana termal ANTES del Parlamento: Széchenyi de 8:00 a ~11:30 (con 37° el madrugón NO es opcional: a mediodía es sopa de gente hirviendo). M1 de vuelta y comida temprana a cubierto.",
         "💡 Comida pre-Parlamento con lógica: Hungarikum Bisztró está a 5 min de Kossuth tér (recomendación de Víctor — reservad y pedid la crepe de pollo). Ojo: el Mercado Central cierra los domingos.",
         "Después del Parlamento: los Zapatos del Danubio están al lado si no cayeron el sábado, y el tranvía 2 os devuelve al centro por la orilla.",
       ],
@@ -171,9 +172,10 @@ const DATA = {
     { fecha: "2026-07-31", nombre: "Ásgeir", lugar: "A38 (el barco)", genero: "Indie-folk", fiab: "ver", fuente: "Songkick, 8-jul" },
     { fecha: "2026-07-31", nombre: "Budapest Play (música callejera)", lugar: "plazas del centro", genero: "Festival urbano", fiab: "ver" },
     { fecha: "2026-08-01", nombre: "MOBY", lugar: "Budapest Park", genero: "Electrónica", fiab: "ver", fuente: "Songkick, 8-jul" },
-    { fecha: "2026-08-02", nombre: "Patriarchy", lugar: "ROBOT", genero: "Dark rock/industrial", fiab: "ver", fuente: "Songkick, 8-jul" },
+    { fecha: "2026-08-02", nombre: "Patriarchy", lugar: "ROBOT", genero: "Dark rock/industrial", fiab: "ver", fuente: "Songkick, 21-jul" },
+    { fecha: "2026-08-02", nombre: "Lenny Kravitz", lugar: "Budapest Arena", genero: "Rock", fiab: "ver", fuente: "Songkick, 21-jul" },
   ],
-  eventosNota: "Cartel localizado en agregadores a 8-jul-2026 — verificar entradas y horarios esa semana. La programación pequeña de los garitos sale con días de antelación en sus Instagram.",
+  eventosNota: "Cartel verificado a 21-jul-2026. Nota: el Sziget cae del 11 al 15 de agosto — os lo perdéis por una semana. El domingo 2 hay doble opción: vuestro Patriarchy en ROBOT (a 10 min, del rollo) o Lenny Kravitz en el Arena (otra liga, entradas aparte). La programación pequeña de los garitos sale con días de antelación en sus Instagram.",
 
   /* ---------- MUSTS ---------- */
   sitios: [
@@ -452,6 +454,7 @@ const DATA = {
 
   /* ---------- PRÁCTICO ---------- */
   practico: {
+    calor: { titulo: "🥵 OLA DE CALOR: leed esto", texto: "Aviso importante (previsión a 21-jul): vuestro finde cae en plena ola de calor. Máximas previstas: viernes 31 ~34°, sábado 1 ~35°, y DOMINGO 2 hasta ~37° — el día más duro, justo el del Parlamento. Baja de golpe el lunes (~28°). Con estos números el plan no es una sugerencia, es supervivencia: (1) todo lo de calle, temprano o al atardecer — de 12 a 17 h, sombra, museo, terma o siesta; (2) hidratación agresiva, botella siempre encima (hay fuentes de agua potable por la ciudad); (3) el domingo, Széchenyi a primera hora y dentro del Parlamento a las 14:15 con aire — encaja perfecto; (4) gorra, protección solar y ropa clara; (5) el baño nocturno de Rudas el viernes es, con este calor, la mejor idea del viaje. La escena nocturna del VII no sufre: se vive de noche, que es cuando refresca.", fiab: "ok", fuente: "Open-Meteo + met.hu · ver. 21-jul-2026" },
     dinero: { titulo: "Forintos", texto: "1 € ≈ 395 HUF (ver conversor arriba). Hungría es UE pero NO euro. Tarjeta funciona en casi todo, bares cutres incluidos; llevad algo de efectivo para lángos y mercadillo. El aviso de siempre: si el datáfono ofrece cobrar «en euros» (DCC), NO — en forintos siempre sale mejor.", fiab: "ok" },
     roaming: { titulo: "Roaming UE: sin dramas", texto: "Hungría es UE: vuestra tarifa española funciona normal, datos incluidos. Sin eSIM, sin configurar nada. Mapa online por la calle sin miramientos.", fiab: "ok" },
     transporte: { titulo: "Moverse: la BKK de 72 h", texto: "La travelcard de 72 horas cuesta 5.500 HUF (~14,5 €) y calza EXACTA con vuestro finde: metro, tranvía y bus ilimitados. Se compra en apps (BudapestGO) o máquinas moradas. Imprescindible el tranvía 2 por la orilla del Danubio: la mejor «atracción» de la ciudad cuesta cero extra. Si llegáis en tren, de Keleti al hotel hay 12 min andando o una parada de M2.", fiab: "ok", fuente: "bkk.hu · ver. 8-jul-2026" },

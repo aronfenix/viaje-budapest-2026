@@ -1,5 +1,5 @@
 /* BUDAPEST 26 · service worker — offline-first */
-const VERSION = "bud26-v12";
+const VERSION = "bud26-v13";
 const PRECACHE = [
   "./",
   "./index.html",

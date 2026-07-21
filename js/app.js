@@ -671,7 +671,7 @@
   /* ---------- PRÁCTICO ---------- */
   function renderPractico(el) {
     const p = DATA.practico;
-    const bloques = ["roaming", "transporte", "dinero", "termas", "timos", "emergencias"].map((k) => {
+    const bloques = ["calor", "roaming", "transporte", "dinero", "termas", "timos", "emergencias"].map((k) => {
       const b = p[k];
       return `<article class="card reveal"><h3>${esc(b.titulo)}</h3><p>${esc(b.texto)}</p><p class="fuente">${fiab(b.fiab)} ${esc(b.fuente || "")}</p></article>`;
     }).join("");
